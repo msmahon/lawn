@@ -15,9 +15,18 @@ router.get('/lawn/:name', function (req, res, next) {
   res.send(data);
 })
 
+router.get('/getLawns', function(req, res, next) {
+	let result = db.getLawnNames()
+	res.send(result)
+})
+
 router.post('/lawn/reset', function(req, res, next) {
 	let result = db.resetDatabase()
 	res.send(result)
+})
+
+router.post('/lawn/add', function(req, res, next) {
+	res.send(JSON.stringify(req))
 })
 
 module.exports = router;
