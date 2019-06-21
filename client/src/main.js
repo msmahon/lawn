@@ -1,5 +1,6 @@
-const Vue = require('vue')
-const App = require('./App.vue')
+import Vue from 'vue'
+import App from './App.vue'
+console.log(Vue.config);
 
 Vue.config.productionTip = false
 
