@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
+var Query = require('./services/database.js')
 
-var indexController = require('./controllers/indexController.js');
+let db = new Query('lawns');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let response = indexController.testResponse();
-  res.send(response);
-});
+  res.send('test');
+})
+
+router.get('/lawn/:name', function (req, res, next) {
+  res.send(req.params);
+})
 
 module.exports = router;
