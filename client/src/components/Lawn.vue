@@ -1,7 +1,12 @@
 <template>
-	<div v-bind:style="gridStyle">
+	<div>
 		<button @click="query">query</button>
-		<Tile v-for="tile in tiles" :key="tile.id"></Tile>
+		<select @change="fetchData">
+			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
+		</select>
+		<div v-bind:style="gridStyle">
+			<Tile v-for="tile in tiles" :key="tile.id"></Tile>
+		</div>
 	</div>
 </template>
 
