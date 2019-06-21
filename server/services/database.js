@@ -48,4 +48,10 @@ module.exports = class Query {
 
 		return this.db.prepare(query).run(params)
 	}
+
+	getLawnNames() {
+		let query = "SELECT name FROM lawns;"
+		
+		return this.db.prepare(query).get()
+	}
 };
