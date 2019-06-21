@@ -56,7 +56,7 @@ export default {
 	},
 	methods: {
 		query() {
-			axios.get('/');
+			axios.get('/api/lawn/test');
 		}
 	},
 	computed: {
