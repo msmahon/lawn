@@ -11,6 +11,28 @@ module.exports = class Query {
 
 		this.db.prepare(drop).run()
 		this.db.prepare(create).run()
+
+		this.addLawn('test',JSON.stringify(
+			{
+				data: [
+					{id: 1, cond: "Healthy"},
+					{id: 2, cond: "Healthy"},
+					{id: 3, cond: "Healthy"},
+					{id: 4, cond: "Healthy"},
+					{id: 5, cond: "Healthy"},
+					{id: 6, cond: "Healthy"},
+					{id: 7, cond: "Healthy"},
+					{id: 8, cond: "Healthy"},
+					{id: 9, cond: "Healthy"},
+					{id: 10, cond: "Healthy"},
+					{id: 11, cond: "Healthy"},
+					{id: 12, cond: "Healthy"}
+				],
+				metaData: {
+					columns: 4
+				}
+			}
+		))
 	}
 
 	getLawn(name) {
