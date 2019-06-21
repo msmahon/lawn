@@ -12,7 +12,7 @@ module.exports = class Query {
     }
   
     getLawn(name) {
-        return this.db.prepare("SELECT data FROM lawns WHERE name = ?;").get(name)
+        return this.db.prepare("SELECT data FROM lawns WHERE name = ?;").pluck(true).get(name)
     }
 
     addLawn(name, data) {
