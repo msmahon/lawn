@@ -1,5 +1,6 @@
 <template>
 	<div v-bind:style="gridStyle">
+		<button @click="query">query</button>
 		<Tile v-for="tile in tiles" :key="tile.id"></Tile>
 	</div>
 </template>
@@ -54,7 +55,9 @@ export default {
 		}
 	},
 	methods: {
-
+		query() {
+			axios.get('/');
+		}
 	},
 	computed: {
 		gridStyle() {
