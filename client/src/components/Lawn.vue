@@ -14,6 +14,7 @@ export default {
 	components: { Tile },
 	data: function() {
 		return {
+			lawns: [],
 			tiles: [
 				{cond: "healthy", id: 1},
 				{cond: "healthy", id: 2},
@@ -69,6 +70,11 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		axios.get('/api/getLawns').then(({data}) => {
+			this.lawns = data
+		})
+	}
 }
 </script>
 
