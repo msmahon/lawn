@@ -3,7 +3,7 @@ var express = require('express')
 var router = express.Router()
 var Query = require('./services/database.js')
 
-let db = new Query('lawns');
+let db = new Query('test.db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/lawn/:name', function (req, res, next) {
-  res.send(req.params);
+  let data = db.getLawn(req.params.name);
+  res.send(data);
 })
 
 module.exports = router;
