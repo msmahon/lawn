@@ -15,4 +15,9 @@ router.get('/lawn/:name', function (req, res, next) {
   res.send(data);
 })
 
+router.post('/lawn/reset', function(req, res, next) {
+	let result = db.resetDatabase()
+	res.send(result)
+})
+
 module.exports = router;
