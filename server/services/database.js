@@ -33,6 +33,24 @@ module.exports = class Query {
 				}
 			}
 		))
+
+		this.addLawn('test2',JSON.stringify(
+			{
+				data: [
+					{id: 1, cond: "Healthy"},
+					{id: 2, cond: "Healthy"},
+					{id: 3, cond: "Healthy"},
+					{id: 4, cond: "Healthy"},
+					{id: 5, cond: "Healthy"},
+					{id: 6, cond: "Healthy"},
+					{id: 7, cond: "Healthy"},
+					{id: 8, cond: "Healthy"}
+				],
+				metaData: {
+					columns: 4
+				}
+			}
+		))
 	}
 
 	getLawn(name) {
@@ -52,6 +70,6 @@ module.exports = class Query {
 	getLawnNames() {
 		let query = "SELECT name FROM lawns;"
 		
-		return this.db.prepare(query).get()
+		return this.db.prepare(query).all()
 	}
 };
