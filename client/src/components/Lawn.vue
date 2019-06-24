@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<button @click="query">query</button>
-		<select @change="fetchData">
+		<select @change="lawnSelected">
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
 		<div v-bind:style="gridStyle">
@@ -20,6 +19,7 @@ export default {
 	data: function() {
 		return {
 			lawns: [],
+			selectedLawn: '',
 			tiles: [
 				{cond: "healthy", id: 1},
 				{cond: "healthy", id: 2},
@@ -55,22 +55,28 @@ export default {
 				{cond: "healthy", id: 32}
 			],
 			metaData: {
-				rows: 4,
 				columns: 8
 			},
 		}
 	},
 	methods: {
-		query() {
-			axios.get('/api/lawn/test');
+		async fetchData(lawnName) {
+			let results = await axios.get(`/api/lawn/${lawnName}`);
+			this.tiles = results.data.data
+			this.metaData = results.data.metaData
+		},
+		lawnSelected(event) {
+			let lawnName = event.target.value
+			this.fetchData(lawnName)
 		}
 	},
 	computed: {
 		gridStyle() {
+			let rows = this.tiles.length / this.metaData.columns
 			return {
 				display: 'grid',
 				backgroundColor: 'white',
-				gridTemplateRows: `repeat(${this.metaData.rows},1fr)`,
+				gridTemplateRows: `repeat(${rows},1fr)`,
 				gridTemplateColumns: `repeat(${this.metaData.columns},1fr)`,
 			}
 		}
@@ -78,6 +84,9 @@ export default {
 	mounted() {
 		axios.get('/api/getLawns').then(({data}) => {
 			this.lawns = data
+			if (this.lawns.length > 0) {
+				this.fetchData(this.lawns[0].name)
+			}
 		})
 	}
 }
