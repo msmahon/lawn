@@ -15,18 +15,18 @@ module.exports = class Query {
 		this.addLawn('test',JSON.stringify(
 			{
 				data: [
-					{id: 1, cond: "Healthy"},
-					{id: 2, cond: "Healthy"},
-					{id: 3, cond: "Healthy"},
-					{id: 4, cond: "Healthy"},
-					{id: 5, cond: "Healthy"},
-					{id: 6, cond: "Healthy"},
-					{id: 7, cond: "Healthy"},
-					{id: 8, cond: "Healthy"},
-					{id: 9, cond: "Healthy"},
-					{id: 10, cond: "Healthy"},
-					{id: 11, cond: "Healthy"},
-					{id: 12, cond: "Healthy"}
+					{id: 1, cond: "healthy"},
+					{id: 2, cond: "healthy"},
+					{id: 3, cond: "healthy"},
+					{id: 4, cond: "healthy"},
+					{id: 5, cond: "healthy"},
+					{id: 6, cond: "healthy"},
+					{id: 7, cond: "healthy"},
+					{id: 8, cond: "healthy"},
+					{id: 9, cond: "healthy"},
+					{id: 10, cond: "healthy"},
+					{id: 11, cond: "healthy"},
+					{id: 12, cond: "healthy"}
 				],
 				metaData: {
 					columns: 4
@@ -37,14 +37,14 @@ module.exports = class Query {
 		this.addLawn('test2',JSON.stringify(
 			{
 				data: [
-					{id: 1, cond: "Healthy"},
-					{id: 2, cond: "Healthy"},
-					{id: 3, cond: "Healthy"},
-					{id: 4, cond: "Healthy"},
-					{id: 5, cond: "Healthy"},
-					{id: 6, cond: "Healthy"},
-					{id: 7, cond: "Healthy"},
-					{id: 8, cond: "Healthy"}
+					{id: 1, cond: "healthy"},
+					{id: 2, cond: "healthy"},
+					{id: 3, cond: "healthy"},
+					{id: 4, cond: "healthy"},
+					{id: 5, cond: "healthy"},
+					{id: 6, cond: "healthy"},
+					{id: 7, cond: "healthy"},
+					{id: 8, cond: "healthy"}
 				],
 				metaData: {
 					columns: 4
