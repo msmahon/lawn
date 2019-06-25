@@ -32,27 +32,22 @@ export default {
 .tile {
 	width: 64px;
 	height: 64px;
-	/* background-color: rgb(212, 96, 96); */
-	border: 1px solid #94D794;
-
-	background: repeating-linear-gradient(
-		135deg,
-		#77A668,
-		#77A668 12.5%,
-		#94D794 12.5%,
-		#94D794 25%
-	);
+	border: 1px solid black;
 }
 
-.tile-weeds {
-
+.tile-healthy::after {
+	content: 'healthy';
 }
 
-.tile-dead {
-
+.tile-weeds::after {
+	content: 'weeds';
 }
 
-.tile-clover {
+.tile-dead::after {
+	content: 'dead';
+}
 
+.tile-clover::after {
+	content: 'clover';
 }
 </style>
