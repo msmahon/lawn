@@ -4,7 +4,7 @@
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
 		<div v-bind:style="gridStyle">
-			<Tile v-for="tile in tiles" :key="tile.id"></Tile>
+			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile"></Tile>
 		</div>
 	</div>
 </template>

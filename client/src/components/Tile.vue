@@ -1,5 +1,5 @@
 <template>
-	<div class="tile"></div>
+	<div class="tile" :class="classes"></div>
 </template>
 
 <script>
@@ -7,10 +7,23 @@ import axios from 'axios'
 
 export default {
 	name: 'tile',
-	props: {},
-	components: {},
+	props: {tileData: Object},
+	data: function() {
+		return {
+			id: '',
+			condition: ''
+		}
+	},
+	computed: {
+		classes() {
+			return `tile-${this.tileData.cond}`
+		}
+	},
 	methods: {
 		
+	},
+	mounted() {
+
 	}
 }
 </script>
