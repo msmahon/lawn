@@ -3,6 +3,7 @@
 		<select @change="lawnSelected">
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
+		<button @click="resetDatabases">Reset databases</button>
 		<div v-bind:style="gridStyle">
 			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selections="selections"></Tile>
 		</div>
@@ -36,6 +37,9 @@ export default {
 		lawnSelected(event) {
 			let lawnName = event.target.value
 			this.fetchData(lawnName)
+		},
+		resetDatabases() {
+			axios.get('/api/lawn/reset');
 		}
 	},
 	computed: {
