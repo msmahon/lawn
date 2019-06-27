@@ -1,6 +1,19 @@
 <template>
 	<div id="app">
-		<Lawn></Lawn>
+		<div id="condition-buttons">
+			<label for="condition">healthy</label>
+			<input type="radio" name="condition" value="healthy" v-model="selectedCondition" id="healthy_button">
+
+			<label for="condition">weeds</label>
+			<input type="radio" name="condition" value="weeds" v-model="selectedCondition" id="healthy_button">
+
+			<label for="condition">dead</label>
+			<input type="radio" name="condition" value="dead" v-model="selectedCondition" id="healthy_button">
+
+			<label for="condition">clover</label>
+			<input type="radio" name="condition" value="clover" v-model="selectedCondition" id="healthy_button">
+		</div>
+		<Lawn :selectedCondition="selectedCondition"></Lawn>
 	</div>
 </template>
 
@@ -12,6 +25,11 @@ import axios from 'axios'
 export default {
 	name: 'app',
 	components: {Lawn},
+	data() {
+		return {
+			selectedCondition: 'healthy'
+		}
+	},
 	methods: {
 		test: function() {
 			let response = axios.get('/api/');
@@ -31,5 +49,9 @@ export default {
 	margin-top: 60px;
 	display: flex;
 	justify-content: center;
+}
+
+#condition-buttons {
+
 }
 </style>
