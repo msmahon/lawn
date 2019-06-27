@@ -1,5 +1,8 @@
 <template>
-	<div class="tile" :class="classes" @click="applyCondition"></div>
+	<div class="tile" :class="classes" @click="updateTile">
+		<div v-text="health"></div>
+		<div v-for="condition in conditions" :key="condition" v-text="condition" :class="condition"></div>
+	</div>
 </template>
 
 <script>
@@ -9,11 +12,12 @@ export default {
 	name: 'tile',
 	props: {
 		tileData: Object,
-		selectedCondition: String
+		selections: Object
 	},
 	data: function() {
 		return {
 			id: '',
+			health: '',
 			conditions: []
 		}
 	},
@@ -23,11 +27,23 @@ export default {
 		}
 	},
 	methods: {
-		applyCondition() {
-			this.conditions.push(this.selectedCondition)
+		updateTile() {
+			if ('health' === this.selections.currentSelection) this.healthUpdate()
+			if ('condition' === this.selections.currentSelection) this.conditionUpdate()
+		},
+		conditionUpdate() {
+			if (this.conditions.includes(this.selections.condition)) {
+				this.conditions = this.conditions.filter(c => c != this.selections.condition)
+			} else {
+				this.conditions.push(this.selections.condition)
+			}
+		},
+		healthUpdate() {
+			this.health = this.selections.health
 		}
 	},
 	mounted() {
+		this.health = this.tileData.health
 		this.conditions = this.tileData.conditions
 	}
 }
@@ -41,19 +57,19 @@ export default {
 	cursor: pointer;
 }
 
-.tile-healthy::after {
-	content: 'healthy';
+.health-good {
+	color: green
 }
 
-.tile-weeds::after {
-	content: 'weeds';
+.weeds {
+	color: rgb(199, 95, 168)
 }
 
-.tile-dead::after {
-	content: 'dead';
+.dead {
+	color: brown
 }
 
-.tile-clover::after {
-	content: 'clover';
+.clover {
+	color: rgb(51, 165, 154)
 }
 </style>

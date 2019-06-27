@@ -4,7 +4,7 @@
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
 		<div v-bind:style="gridStyle">
-			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selectedCondition="selectedCondition"></Tile>
+			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selections="selections"></Tile>
 		</div>
 	</div>
 </template>
@@ -17,7 +17,7 @@ export default {
 	name: 'lawn',
 	components: { Tile },
 	props: {
-		selectedCondition: String
+		selections: Object
 	},
 	data: function() {
 		return {

@@ -1,19 +1,23 @@
 <template>
 	<div id="app">
 		<div id="condition-buttons">
-			<label for="condition">healthy</label>
-			<input type="radio" name="condition" value="healthy" v-model="selectedCondition" id="healthy_button">
-
 			<label for="condition">weeds</label>
-			<input type="radio" name="condition" value="weeds" v-model="selectedCondition" id="healthy_button">
-
-			<label for="condition">dead</label>
-			<input type="radio" name="condition" value="dead" v-model="selectedCondition" id="healthy_button">
+			<input type="radio" name="condition" value="weeds" v-model="selectedCondition" @click="currentSelection = 'condition'">
 
 			<label for="condition">clover</label>
-			<input type="radio" name="condition" value="clover" v-model="selectedCondition" id="healthy_button">
+			<input type="radio" name="condition" value="clover" v-model="selectedCondition" @click="currentSelection = 'condition'">
 		</div>
-		<Lawn :selectedCondition="selectedCondition"></Lawn>
+		<div id="health-buttons">
+			<label for="health">Good</label>
+			<input type="radio" name="health" value="Good" v-model="selectedHealth" @click="currentSelection = 'health'">
+
+			<label for="health">Fair</label>
+			<input type="radio" name="health" value="Fair" v-model="selectedHealth" @click="currentSelection = 'health'">
+
+			<label for="health">Dead</label>
+			<input type="radio" name="health" value="Dead" v-model="selectedHealth" @click="currentSelection = 'health'">
+		</div>
+		<Lawn :selections="selections"></Lawn>
 	</div>
 </template>
 
@@ -27,7 +31,18 @@ export default {
 	components: {Lawn},
 	data() {
 		return {
-			selectedCondition: 'healthy'
+			selectedHealth: 'good',
+			selectedCondition: 'healthy',
+			currentSelection: 'health'
+		}
+	},
+	computed: {
+		selections() {
+			return {
+				health: this.selectedHealth,
+				condition: this.selectedCondition,
+				currentSelection: this.currentSelection
+			}
 		}
 	},
 	methods: {
