@@ -4,7 +4,7 @@
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
 		<div v-bind:style="gridStyle">
-			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile"></Tile>
+			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selectedCondition="selectedCondition"></Tile>
 		</div>
 	</div>
 </template>
@@ -16,6 +16,9 @@ import axios from 'axios'
 export default {
 	name: 'lawn',
 	components: { Tile },
+	props: {
+		selectedCondition: String
+	},
 	data: function() {
 		return {
 			lawns: [],
