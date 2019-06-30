@@ -1,23 +1,25 @@
 <template>
 	<div id="app">
-		<div id="condition-buttons">
-			<label for="condition">weeds</label>
-			<input type="radio" name="condition" value="weeds" v-model="selectedCondition" @click="currentSelection = 'condition'">
+		<div id="container">
+			<div id="condition-buttons">
+				<label for="condition">weeds</label>
+				<input type="radio" name="condition" value="weeds" v-model="selectedCondition" @click="currentSelection = 'condition'">
 
-			<label for="condition">clover</label>
-			<input type="radio" name="condition" value="clover" v-model="selectedCondition" @click="currentSelection = 'condition'">
+				<label for="condition">clover</label>
+				<input type="radio" name="condition" value="clover" v-model="selectedCondition" @click="currentSelection = 'condition'">
+			</div>
+			<div id="health-buttons">
+				<label for="health">Good</label>
+				<input type="radio" name="health" value="good" v-model="selectedHealth" @click="currentSelection = 'health'">
+
+				<label for="health">Fair</label>
+				<input type="radio" name="health" value="fair" v-model="selectedHealth" @click="currentSelection = 'health'">
+
+				<label for="health">Dead</label>
+				<input type="radio" name="health" value="dead" v-model="selectedHealth" @click="currentSelection = 'health'">
+			</div>
+			<Lawn :selections="selections"></Lawn>
 		</div>
-		<div id="health-buttons">
-			<label for="health">Good</label>
-			<input type="radio" name="health" value="good" v-model="selectedHealth" @click="currentSelection = 'health'">
-
-			<label for="health">Fair</label>
-			<input type="radio" name="health" value="fair" v-model="selectedHealth" @click="currentSelection = 'health'">
-
-			<label for="health">Dead</label>
-			<input type="radio" name="health" value="dead" v-model="selectedHealth" @click="currentSelection = 'health'">
-		</div>
-		<Lawn :selections="selections"></Lawn>
 	</div>
 </template>
 
@@ -66,7 +68,8 @@ export default {
 	justify-content: center;
 }
 
-#condition-buttons {
-
+#container {
+	display: flex;
+	flex-direction: column;
 }
 </style>
