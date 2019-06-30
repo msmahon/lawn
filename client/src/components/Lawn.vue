@@ -5,8 +5,10 @@
 		</select>
 		<button @click="resetDatabase">Reset Database</button>
 		<button @click="saveChanges">Save Changes</button>
-		<div v-bind:style="gridStyle">
-			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selections="selections"></Tile>
+		<div id="lawn">
+			<div v-bind:style="gridStyle">
+				<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selections="selections"></Tile>
+			</div>
 		</div>
 	</div>
 </template>
@@ -73,4 +75,7 @@ export default {
 </script>
 
 <style>
+	#lawn {
+		padding: 24px;
+	}
 </style>
