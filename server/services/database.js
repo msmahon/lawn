@@ -72,4 +72,12 @@ module.exports = class Query {
 		
 		return this.db.prepare(query).all()
 	}
+
+	saveLawn(data, name) {
+		console.log(data)
+		console.log(name)
+		let query = "UPDATE lawns SET data = ? WHERE name = ?;"
+
+		return this.db.prepare(query).run(JSON.stringify(data), name)
+	}
 };

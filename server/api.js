@@ -29,4 +29,8 @@ router.post('/lawn/add', function(req, res, next) {
 	res.send(JSON.stringify(req))
 })
 
+router.post('/lawn/save', function(req, res, next) {
+	return db.saveLawn(req.body.data, req.body.name)
+})
+
 module.exports = router;
