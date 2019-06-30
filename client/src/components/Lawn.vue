@@ -1,9 +1,10 @@
 <template>
 	<div>
-		<select @change="lawnSelected">
+		<select @change="lawnSelected" v-model="selectedLawn">
 			<option v-for="lawn in lawns" :value="lawn.name" :key="lawn.name" v-text="lawn.name"></option>
 		</select>
-		<button @click="resetDatabases">Reset databases</button>
+		<button @click="resetDatabase">Reset Database</button>
+		<button @click="saveChanges">Save Changes</button>
 		<div v-bind:style="gridStyle">
 			<Tile v-for="tile in tiles" :key="tile.id" :tileData="tile" :selections="selections"></Tile>
 		</div>
@@ -12,7 +13,7 @@
 
 <script>
 import Tile from './Tile.vue'
-import axios from 'axios'
+import util from '../utilities'
 
 export default {
 	name: 'lawn',
@@ -23,23 +24,31 @@ export default {
 	data: function() {
 		return {
 			lawns: [],
-			selectedLawn: '',
 			tiles: [],
 			metaData: {},
+			selectedLawn: ''
 		}
 	},
 	methods: {
-		async fetchData(lawnName) {
-			let results = await axios.get(`/api/lawn/${lawnName}`);
+		async lawnSelected() {
+			let results = await util.fetchLawnData(this.selectedLawn)
+			if (results) {
+				this.tiles = []
+				this.metaData = {}
+			}
 			this.tiles = results.data.data
 			this.metaData = results.data.metaData
 		},
-		lawnSelected(event) {
-			let lawnName = event.target.value
-			this.fetchData(lawnName)
+		resetDatabase() {
+			util.resetDatabase()
 		},
-		resetDatabases() {
-			axios.get('/api/lawn/reset');
+		async saveChanges() {
+			let data = {
+				"data": this.tiles,
+				"metaData": this.metaData
+			}
+			let response = await util.saveLawn(data, this.selectedLawn)
+			console.log(response)
 		}
 	},
 	computed: {
@@ -53,13 +62,12 @@ export default {
 			}
 		}
 	},
-	mounted() {
-		axios.get('/api/getLawns').then(({data}) => {
-			this.lawns = data
-			if (this.lawns.length > 0) {
-				this.fetchData(this.lawns[0].name)
-			}
-		})
+	async mounted() {
+		this.lawns = await util.getLawns()
+		if (this.lawns.length > 0) {
+			this.selectedLawn = this.lawns[0].name
+			this.lawnSelected()
+		}
 	}
 }
 </script>
