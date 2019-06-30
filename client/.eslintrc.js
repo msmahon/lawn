@@ -1,7 +1,8 @@
 module.exports = {
+	extends: [
+		'plugin:vue/recommended'
+	],
 	rules: {
-		"no-tabs": 0,
-		"indent": [1, "tab"],
 		"no-console": "off",
 		"includeCommonJSModuleExports": true
 	},
