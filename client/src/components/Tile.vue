@@ -1,7 +1,6 @@
 <template>
 	<div class="tile" :class="classes" @click="updateTile">
-		<div v-text="tileData.health"></div>
-		<div v-for="condition in tileData.conditions" :key="condition" v-text="condition" :class="condition"></div>
+		<div v-for="condition in tileData.conditions" :key="condition" v-text="condition" :class="classes"></div>
 	</div>
 </template>
 
@@ -19,7 +18,9 @@ export default {
 	},
 	computed: {
 		classes() {
-			return this.tileData.conditions.map(condition => `tile-${condition}`)
+			let classes = this.tileData.conditions.map(condition => `condition-${condition}`)
+			classes.push(`health-${this.tileData.health}`)
+			return classes
 		}
 	},
 	methods: {
@@ -52,18 +53,22 @@ export default {
 }
 
 .health-good {
-	color: green
+	background-image: url('../assets/grass/health_good.png');
 }
 
-.weeds {
+.health-fair {
+	background-image: url('../assets/grass/health_fair.png');
+}
+
+.health-dead {
+	background-image: url('../assets/grass/health_dead.png');
+}
+
+.condition-weeds {
 	color: rgb(199, 95, 168)
 }
 
-.dead {
-	color: brown
-}
-
-.clover {
+.condition-clover {
 	color: rgb(51, 165, 154)
 }
 </style>
