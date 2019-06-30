@@ -1,7 +1,7 @@
 <template>
 	<div class="tile" :class="classes" @click="updateTile">
-		<div v-text="health"></div>
-		<div v-for="condition in conditions" :key="condition" v-text="condition" :class="condition"></div>
+		<div v-text="tileData.health"></div>
+		<div v-for="condition in tileData.conditions" :key="condition" v-text="condition" :class="condition"></div>
 	</div>
 </template>
 
@@ -15,15 +15,11 @@ export default {
 		selections: Object
 	},
 	data: function() {
-		return {
-			id: '',
-			health: '',
-			conditions: []
-		}
+		return {}
 	},
 	computed: {
 		classes() {
-			return this.conditions.map(condition => `tile-${condition}`)
+			return this.tileData.conditions.map(condition => `tile-${condition}`)
 		}
 	},
 	methods: {
@@ -32,19 +28,17 @@ export default {
 			if ('condition' === this.selections.currentSelection) this.conditionUpdate()
 		},
 		conditionUpdate() {
-			if (this.conditions.includes(this.selections.condition)) {
-				this.conditions = this.conditions.filter(c => c != this.selections.condition)
+			if (this.tileData.conditions.includes(this.selections.condition)) {
+				this.tileData.conditions = this.tileData.conditions.filter(c => c != this.selections.condition)
 			} else {
-				this.conditions.push(this.selections.condition)
+				this.tileData.conditions.push(this.selections.condition)
 			}
 		},
 		healthUpdate() {
-			this.health = this.selections.health
+			this.tileData.health = this.selections.health
 		}
 	},
 	mounted() {
-		this.health = this.tileData.health
-		this.conditions = this.tileData.conditions
 	}
 }
 </script>
