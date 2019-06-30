@@ -9,13 +9,13 @@
 		</div>
 		<div id="health-buttons">
 			<label for="health">Good</label>
-			<input type="radio" name="health" value="Good" v-model="selectedHealth" @click="currentSelection = 'health'">
+			<input type="radio" name="health" value="good" v-model="selectedHealth" @click="currentSelection = 'health'">
 
 			<label for="health">Fair</label>
-			<input type="radio" name="health" value="Fair" v-model="selectedHealth" @click="currentSelection = 'health'">
+			<input type="radio" name="health" value="fair" v-model="selectedHealth" @click="currentSelection = 'health'">
 
 			<label for="health">Dead</label>
-			<input type="radio" name="health" value="Dead" v-model="selectedHealth" @click="currentSelection = 'health'">
+			<input type="radio" name="health" value="dead" v-model="selectedHealth" @click="currentSelection = 'health'">
 		</div>
 		<Lawn :selections="selections"></Lawn>
 	</div>
