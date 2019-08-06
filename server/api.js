@@ -2,8 +2,10 @@
 var express = require('express')
 var router = express.Router()
 var Query = require('./services/database.js')
+var Weather = require('./services/weather.js')
 
 let db = new Query('lawn.db');
+let weather = new Weather();
 
 console.log(process.env.WEATHER_API_KEY);
 
