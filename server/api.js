@@ -5,6 +5,8 @@ var Query = require('./services/database.js')
 
 let db = new Query('lawn.db');
 
+console.log(process.env.WEATHER_API_KEY);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.send('test');
