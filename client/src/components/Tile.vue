@@ -1,6 +1,6 @@
 <template>
-	<div class="tile" :class="classes" @click="updateTile">
-		<div v-for="condition in tileData.conditions" :key="condition" v-text="condition" :class="classes"></div>
+	<div class="tile" :class="healthClass" @click="updateTile">
+		<div v-for="condition in tileData.conditions" :key="condition" class="condition" :class="condition"></div>
 	</div>
 </template>
 
@@ -17,11 +17,7 @@ export default {
 		return {}
 	},
 	computed: {
-		classes() {
-			let classes = this.tileData.conditions.map(condition => `condition-${condition}`)
-			classes.push(`health-${this.tileData.health}`)
-			return classes
-		}
+		healthClass() { return `health-${this.tileData.health}` }
 	},
 	methods: {
 		updateTile() {
@@ -48,27 +44,34 @@ export default {
 .tile {
 	width: 64px;
 	height: 64px;
-	border: 1px solid black;
+	border: 1px solid rgb(21, 82, 9);
 	cursor: pointer;
 }
 
 .health-good {
-	background-image: url('../assets/grass/health_good.png');
+	background-color: rgb(29, 112, 12);
 }
 
 .health-fair {
-	background-image: url('../assets/grass/health_fair.png');
+	background-color: rgb(148, 221, 130);
 }
 
 .health-dead {
-	background-image: url('../assets/grass/health_dead.png');
+	background-color: rgb(224, 240, 135);
 }
 
-.condition-weeds {
-	color: rgb(199, 95, 168)
+.condition {
+	width: 32px;
+	height: 32px;
+	float: left;
+	font-size: 1.5em;
 }
 
-.condition-clover {
-	color: rgb(51, 165, 154)
+.weeds::after {
+	content: '🌱';
+}
+
+.clover::after {
+	content: '🍀';
 }
 </style>
