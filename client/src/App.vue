@@ -19,6 +19,26 @@
 				<input type="radio" name="health" value="dead" v-model="selectedHealth" @click="currentSelection = 'health'">
 			</div>
 			<Lawn :selections="selections"></Lawn>
+			<div id="lawn-details">
+				<h2>Details</h2>
+				<!-- zip -->
+				<label for="zipcode">
+					ZIP Code:
+					<input type="text" name="zipcode">
+				</label>
+				<!-- grass type -->
+				<label for="zipcode">
+					Grass Type:
+					<select name="grassType" id="grassType">
+						<option value=""></option>
+						<option value=""></option>
+						<option value=""></option>
+						<option value=""></option>
+						<option value=""></option>
+					</select>
+				</label>
+				<!--  -->
+			</div>
 		</div>
 	</div>
 </template>
