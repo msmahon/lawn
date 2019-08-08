@@ -6,3 +6,55 @@ header {
 	color: white;
 	font-family: sans-serif;
 }
+
+.color-primary-100 { color: hsl(150, 48%, 84%) }
+.color-primary-200 { color: hsl(150, 55%, 78%) }
+.color-primary-300 { color: hsl(150, 46%, 65%) }
+.color-primary-400 { color: hsl(150, 38%, 53%) }
+.color-primary-500 { color: hsl(150, 41%, 43%) }
+.color-primary-600 { color: hsl(150, 49%, 36%) }
+.color-primary-700 { color: hsl(150, 56%, 30%) }
+.color-primary-800 { color: hsl(150, 63%, 22%) }
+.color-primary-900 { color: hsl(150, 63%, 17%) }
+
+.bgcolor-primary-100 { background-color: hsl(150, 48%, 84%) }
+.bgcolor-primary-200 { background-color: hsl(150, 55%, 78%) }
+.bgcolor-primary-300 { background-color: hsl(150, 46%, 65%) }
+.bgcolor-primary-400 { background-color: hsl(150, 38%, 53%) }
+.bgcolor-primary-500 { background-color: hsl(150, 41%, 43%) }
+.bgcolor-primary-600 { background-color: hsl(150, 49%, 36%) }
+.bgcolor-primary-700 { background-color: hsl(150, 56%, 30%) }
+.bgcolor-primary-800 { background-color: hsl(150, 63%, 22%) }
+.bgcolor-primary-900 { background-color: hsl(150, 63%, 17%) }
+
+.color-grey-100 { color: hsl(150, 3%, 90%) }
+.color-grey-200 { color: hsl(150, 3%, 80%) }
+.color-grey-300 { color: hsl(150, 3%, 70%) }
+.color-grey-400 { color: hsl(150, 3%, 60%) }
+.color-grey-500 { color: hsl(150, 3%, 50%) }
+.color-grey-600 { color: hsl(150, 3%, 40%) }
+.color-grey-700 { color: hsl(150, 3%, 30%) }
+.color-grey-800 { color: hsl(150, 3%, 20%) }
+.color-grey-900 { color: hsl(150, 3%, 10%) }
+
+.bgcolor-grey-100 { background-color: hsl(150, 3%, 90%) }
+.bgcolor-grey-200 { background-color: hsl(150, 3%, 80%) }
+.bgcolor-grey-300 { background-color: hsl(150, 3%, 70%) }
+.bgcolor-grey-400 { background-color: hsl(150, 3%, 60%) }
+.bgcolor-grey-500 { background-color: hsl(150, 3%, 50%) }
+.bgcolor-grey-600 { background-color: hsl(150, 3%, 40%) }
+.bgcolor-grey-700 { background-color: hsl(150, 3%, 30%) }
+.bgcolor-grey-800 { background-color: hsl(150, 3%, 20%) }
+.bgcolor-grey-900 { background-color: hsl(150, 3%, 10%) }
+
+.color-accent-100 { color: hsl(300, 68%, 85%) }
+.color-accent-300 { color: hsl(300, 74%, 79%) }
+.color-accent-500 { color: hsl(300, 77%, 70%) }
+.color-accent-700 { color: hsl(300, 61%, 56%) }
+.color-accent-900 { color: hsl(300, 69%, 37%) }
+
+.bgcolor-accent-100 { background-color: hsl(300, 68%, 85%) }
+.bgcolor-accent-300 { background-color: hsl(300, 74%, 79%) }
+.bgcolor-accent-500 { background-color: hsl(300, 77%, 70%) }
+.bgcolor-accent-700 { background-color: hsl(300, 61%, 56%) }
+.bgcolor-accent-900 { background-color: hsl(300, 69%, 37%) }
