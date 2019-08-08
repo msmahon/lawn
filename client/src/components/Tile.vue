@@ -44,20 +44,20 @@ export default {
 .tile {
 	width: 64px;
 	height: 64px;
-	border: 1px solid rgb(21, 82, 9);
+	border: 1px solid hsl(150, 63%, 22%);
 	cursor: pointer;
 }
 
 .health-good {
-	background-color: rgb(29, 112, 12);
+	background-color: hsl(150, 56%, 30%);
 }
 
 .health-fair {
-	background-color: rgb(148, 221, 130);
+	background-color: hsl(150, 38%, 53%);
 }
 
 .health-dead {
-	background-color: rgb(224, 240, 135);
+	background-color: hsl(82, 37%, 72%);
 }
 
 .condition {
