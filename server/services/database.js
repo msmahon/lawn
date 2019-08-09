@@ -86,12 +86,13 @@ module.exports = class Query {
 			{ name: "Zoysia",				blade: "narrow, needle-like",	color: "green",					texture: "prickly, stiff",	growth: "slow",	water: "average",		season: "warm", image_url: "#"}
 		]
 
-		let query = this.db.prepare("INSERT INTO grass_types (name, blade, color, texture, growth, water, season, image_url) VALUES (@name, @blade, @color, @texture, @growth, @water, @season, @image_url);")
+		let insert = this.db.prepare("INSERT INTO grass_types (name, blade, color, texture, growth, water, season, image_url) VALUES (@name, @blade, @color, @texture, @growth, @water, @season, @image_url);")
 
-		this.db.transaction(grasses => {
-			console.log(grasses)
-			for (const grass of grasses) query.run(grass)
+		let insertMany = this.db.transaction((grasses) => {
+			for (const grass of grasses) insert.run(grass)
 		})
+
+		insertMany(grasses);
 	}
 
 	getLawn(name) {
