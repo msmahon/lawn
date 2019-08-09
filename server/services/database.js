@@ -5,7 +5,43 @@ module.exports = class Query {
 		this.db = Database(database, {verbose: console.log})
 	}
 
+	randomLawnConfiguration() {
+		let data = []
+		let metaData = {}
+		const healthOptions = ['good', 'fair', 'dead']
+		const conditionOptions = ['clover', 'weeds']
 
+		let maxWidth = 30
+		let maxHeight = 10
+		let minWidth = 10
+		let minHeight = 4
+		let width = this.randomNum(maxWidth)
+		let height = this.randomNum(maxHeight)
+
+		while (width < minWidth) { width = this.randomNum(maxWidth) }
+		while (height < minHeight) { height = this.randomNum(maxHeight) }
+
+		metaData.columns = width
+
+		for (let i = 0; i < width * height; i++) {
+			let cond = [];
+			switch (this.randomNum(2)) {
+				case 0:
+					break
+				case 1:
+					cond.push(conditionOptions[this.randomNum(1)])
+					break
+				case 2:
+					cond = conditionOptions
+					break
+
+			}
+			data.push({ id: i, health: healthOptions[this.randomNum(2)], conditions: cond })
+		}
+		return {data,metaData}
+	}
+
+	randomNum(max) { return Math.round(Math.random()*max,0) }
 
 	resetDatabase() {
 		let drop = "DROP TABLE IF EXISTS lawns;"
@@ -14,45 +50,50 @@ module.exports = class Query {
 		this.db.prepare(drop).run()
 		this.db.prepare(createLawnTable).run()
 
-		this.addLawn('test',JSON.stringify(
-			{
-				data: [
-					{id: 1, health: 'good', conditions: []},
-					{id: 2, health: 'good', conditions: []},
-					{id: 3, health: 'good', conditions: []},
-					{id: 4, health: 'good', conditions: []},
-					{id: 5, health: 'good', conditions: []},
-					{id: 6, health: 'good', conditions: []},
-					{id: 7, health: 'good', conditions: []},
-					{id: 8, health: 'good', conditions: []},
-					{id: 9, health: 'good', conditions: []},
-					{id: 10, health: 'good', conditions: []},
-					{id: 11, health: 'good', conditions: []},
-					{id: 12, health: 'good', conditions: []}
-				],
-				metaData: {
-					columns: 4
-				}
-			}
-		))
+		let lawn1 = this.randomLawnConfiguration()
+		let lawn2 = this.randomLawnConfiguration()
 
-		this.addLawn('test2',JSON.stringify(
-			{
-				data: [
-					{id: 1, health: 'good', conditions: []},
-					{id: 2, health: 'good', conditions: []},
-					{id: 3, health: 'good', conditions: []},
-					{id: 4, health: 'good', conditions: []},
-					{id: 5, health: 'good', conditions: []},
-					{id: 6, health: 'good', conditions: []},
-					{id: 7, health: 'good', conditions: []},
-					{id: 8, health: 'good', conditions: []}
-				],
-				metaData: {
-					columns: 4
-				}
-			}
-		))
+		this.addLawn('test1', JSON.stringify(lawn1))
+		this.addLawn('test2', JSON.stringify(lawn2))
+		// this.addLawn('test',JSON.stringify(
+		// 	{
+		// 		data: [
+		// 			{id: 1, health: 'good', conditions: []},
+		// 			{id: 2, health: 'good', conditions: []},
+		// 			{id: 3, health: 'good', conditions: []},
+		// 			{id: 4, health: 'good', conditions: []},
+		// 			{id: 5, health: 'good', conditions: []},
+		// 			{id: 6, health: 'good', conditions: []},
+		// 			{id: 7, health: 'good', conditions: []},
+		// 			{id: 8, health: 'good', conditions: []},
+		// 			{id: 9, health: 'good', conditions: []},
+		// 			{id: 10, health: 'good', conditions: []},
+		// 			{id: 11, health: 'good', conditions: []},
+		// 			{id: 12, health: 'good', conditions: []}
+		// 		],
+		// 		metaData: {
+		// 			columns: 4
+		// 		}
+		// 	}
+		// ))
+
+		// this.addLawn('test2',JSON.stringify(
+		// 	{
+		// 		data: [
+		// 			{id: 1, health: 'good', conditions: []},
+		// 			{id: 2, health: 'good', conditions: []},
+		// 			{id: 3, health: 'good', conditions: []},
+		// 			{id: 4, health: 'good', conditions: []},
+		// 			{id: 5, health: 'good', conditions: []},
+		// 			{id: 6, health: 'good', conditions: []},
+		// 			{id: 7, health: 'good', conditions: []},
+		// 			{id: 8, health: 'good', conditions: []}
+		// 		],
+		// 		metaData: {
+		// 			columns: 4
+		// 		}
+		// 	}
+		// ))
 
 		this.createGrassTable()
 	}
