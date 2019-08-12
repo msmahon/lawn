@@ -11,10 +11,10 @@ module.exports = class Query {
 		const healthOptions = ['good', 'fair', 'dead']
 		const conditionOptions = ['clover', 'weeds']
 
-		let maxWidth = 30
-		let maxHeight = 10
-		let minWidth = 10
-		let minHeight = 4
+		let maxWidth = 12
+		let maxHeight = 6
+		let minWidth = 8
+		let minHeight = 3
 		let width = this.randomNum(maxWidth)
 		let height = this.randomNum(maxHeight)
 
