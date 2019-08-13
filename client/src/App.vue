@@ -83,6 +83,32 @@ export default {
 
 #container {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+}
+
+.menu {
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
+	width: 300px;
+}
+
+.option-set {
+	background-color: rgb(255,255,255);
+	border-radius: 4px;
+	border: 1px solid hsl(150,8%, 80%);
+	width: 100%;
+	margin: 10px 0 10px 0;
+}
+
+.menu .option {
+	width: 100%;
+	padding: 4px;
+	border-bottom: 1px solid hsl(150, 8%, 80%);
+	width: auto;
+}
+
+.menu .option:last-child {
+	border: none;
 }
 </style>
