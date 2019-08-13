@@ -1,24 +1,34 @@
 <template>
 	<div id="app">
 		<div id="container">
-			<div id="condition-buttons">
-				<label for="condition">weeds</label>
-				<input type="radio" name="condition" value="weeds" v-model="selectedCondition" @click="currentSelection = 'condition'">
+			<div id="tile-modifiers" class="menu bgcolor-grey-100">
+				<div id="condition-buttons">
 
-				<label for="condition">clover</label>
-				<input type="radio" name="condition" value="clover" v-model="selectedCondition" @click="currentSelection = 'condition'">
+					<div class="option-set bgcolor-grey-100">
+						<div v-for="option in conditionOptions" :key="option" class="option">
+							<label for="condition" v-text="option"></label>
+							<input type="radio" name="condition" :value="option" v-model="selectedCondition" @click="currentSelection = 'condition'">
+						</div>
+					</div>
+
+				</div>
+				<div id="health-buttons">
+
+					<div class="option-set bgcolor-grey-100">
+						<div v-for="option in healthOptions" :key="option" class="option">
+							<label for="health" v-text="option"></label>
+							<input type="radio" name="health" :value="option" v-model="selectedHealth" @click="currentSelection = 'condition'">
+						</div>
+					</div>
+
+				</div>
 			</div>
-			<div id="health-buttons">
-				<label for="health">Good</label>
-				<input type="radio" name="health" value="good" v-model="selectedHealth" @click="currentSelection = 'health'">
+			
+			<Lawn :selections="selections" id="lawn"></Lawn>
 
-				<label for="health">Fair</label>
-				<input type="radio" name="health" value="fair" v-model="selectedHealth" @click="currentSelection = 'health'">
+			<div class="menu bgcolor-grey-100">
 
-				<label for="health">Dead</label>
-				<input type="radio" name="health" value="dead" v-model="selectedHealth" @click="currentSelection = 'health'">
 			</div>
-			<Lawn :selections="selections"></Lawn>
 		</div>
 	</div>
 </template>
@@ -35,7 +45,10 @@ export default {
 		return {
 			selectedHealth: 'good',
 			selectedCondition: 'healthy',
-			currentSelection: 'health'
+			currentSelection: 'health',
+
+			conditionOptions: ['weeds', 'clover'],
+			healthOptions: ['good', 'fair', 'dead']
 		}
 	},
 	computed: {
