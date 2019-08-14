@@ -4,6 +4,13 @@ module.exports = {
 	],
 	rules: {
 		"no-console": "off",
+		'vue/max-attributes-per-line': [2, {
+			'singleline': 3,
+			'multiline': {
+				'max': 1,
+				'allowFirstLine': false
+			}
+		}],
 		"includeCommonJSModuleExports": true
 	},
 	env: {
