@@ -19,7 +19,7 @@
         <div id="health-buttons">
           <div class="option-set bgcolor-grey-100">
             <div v-for="option in healthOptions" :key="option" class="option">
-              <label for="health" v-text="option | capitalize" />
+              <label for="health" v-text="option" />
               <input
                 v-model="selectedHealth"
                 type="radio"
@@ -30,6 +30,7 @@
             </div>
           </div>
         </div>
+        <Radio :options="conditionOptions" category="condition" />
       </div>
 
       <Lawn id="lawn" :selections="selections" />
@@ -41,18 +42,12 @@
 
 <script>
 import Lawn from './components/Lawn.vue'
+import Radio from './components/Radio.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
-  components: {Lawn},
-  filters: {
-    capitalize(value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
-  },
+  components: {Lawn, Radio},
   data() {
     return {
       selectedHealth: 'good',
