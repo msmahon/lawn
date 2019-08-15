@@ -22,6 +22,10 @@ export default {
     selections: {
       type: Object,
       default: Object
+    },
+    currentSelection: {
+      type: String,
+      default: 'health'
     }
   },
   data: function() {
@@ -32,14 +36,14 @@ export default {
   },
   methods: {
     updateTile() {
-      if ('health' === this.selections.currentSelection) this.healthUpdate()
-      if ('condition' === this.selections.currentSelection) this.conditionUpdate()
+      if ('health' === this.currentSelection) this.healthUpdate()
+      if ('condition' === this.currentSelection) this.conditionUpdate()
     },
     conditionUpdate() {
-      if (this.tileData.conditions.includes(this.selections.condition)) {
-        this.tileData.conditions = this.tileData.conditions.filter(c => c != this.selections.condition)
+      if (this.tileData.conditions.includes(this.selections[this.currentSelection])) {
+        this.tileData.conditions = this.tileData.conditions.filter(c => c != this.selections[this.currentSelection])
       } else {
-        this.tileData.conditions.push(this.selections.condition)
+        this.tileData.conditions.push(this.selections[this.currentSelection])
       }
     },
     healthUpdate() {

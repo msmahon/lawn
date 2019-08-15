@@ -2,38 +2,11 @@
   <div id="app">
     <div id="container">
       <div id="tile-modifiers" class="menu bgcolor-grey-100">
-        <div id="condition-buttons">
-          <div class="option-set bgcolor-grey-100">
-            <div v-for="option in conditionOptions" :key="option" class="option">
-              <label for="condition" v-text="option" />
-              <input
-                v-model="selectedCondition"
-                type="radio"
-                name="condition"
-                :value="option"
-                @click="currentSelection = 'condition'"
-              >
-            </div>
-          </div>
-        </div>
-        <div id="health-buttons">
-          <div class="option-set bgcolor-grey-100">
-            <div v-for="option in healthOptions" :key="option" class="option">
-              <label for="health" v-text="option" />
-              <input
-                v-model="selectedHealth"
-                type="radio"
-                name="health"
-                :value="option"
-                @click="currentSelection = 'condition'"
-              >
-            </div>
-          </div>
-        </div>
-        <Radio :options="conditionOptions" category="condition" />
+        <Radio :options="conditionOptions" :current-selection="currentSelection" attribute="condition" />
+        <Radio :options="healthOptions" :current-selection="currentSelection" attribute="health" />
       </div>
 
-      <Lawn id="lawn" :selections="selections" />
+      <Lawn id="lawn" :selections="selections" :current-selection="currentSelection" />
 
       <div class="menu bgcolor-grey-100" />
     </div>
@@ -41,6 +14,7 @@
 </template>
 
 <script>
+import {EventBus} from './EventBus'
 import Lawn from './components/Lawn.vue'
 import Radio from './components/Radio.vue'
 import axios from 'axios'
@@ -50,22 +24,21 @@ export default {
   components: {Lawn, Radio},
   data() {
     return {
-      selectedHealth: 'good',
-      selectedCondition: 'healthy',
+      selections: {
+        health: 'good',
+        condition: 'weeds'
+      },
       currentSelection: 'health',
-
       conditionOptions: ['weeds', 'clover'],
       healthOptions: ['good', 'fair', 'dead']
     }
   },
-  computed: {
-    selections() {
-      return {
-        health: this.selectedHealth,
-        condition: this.selectedCondition,
-        currentSelection: this.currentSelection
-      }
-    }
+  created() {
+    EventBus.$on('attributeUpdate', (payload) => {
+      console.log(this.selections)
+      this.currentSelection = payload[0]
+      this.selections[payload[0]] = payload[1]
+    })
   },
   methods: {
     test: function() {

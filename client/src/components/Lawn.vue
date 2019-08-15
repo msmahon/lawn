@@ -21,6 +21,7 @@
           :key="tile.id"
           :tile-data="tile"
           :selections="selections"
+          :current-selection="currentSelection"
         />
       </div>
     </div>
@@ -38,6 +39,10 @@ export default {
     selections: {
       type: Object,
       default: Object
+    },
+    currentSelection: {
+      type: String,
+      default: 'health'
     }
   },
   data: function() {
