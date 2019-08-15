@@ -2,14 +2,14 @@
   <div id="app">
     <div id="container">
       <div id="tile-modifiers" class="menu bgcolor-grey-100">
-        <div class="menu-title">
+        <div class="menu-title color-grey-700">
           Tile Modifiers
         </div>
-        <div class="options-title">
+        <div class="options-title  color-grey-600">
           Conditions
         </div>
         <Radio :options="conditionOptions" :current-selection="currentSelection" attribute="condition" />
-        <div class="options-title">
+        <div class="options-title  color-grey-600">
           Health
         </div>
         <Radio :options="healthOptions" :current-selection="currentSelection" attribute="health" />
@@ -18,7 +18,7 @@
       <Lawn id="lawn" :selections="selections" :current-selection="currentSelection" />
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
-        <div class="menu-title">
+        <div class="menu-title color-grey-700">
           Lawn Data
         </div>
       </div>
