@@ -50,7 +50,8 @@ export default {
       lawns: [],
       tiles: [],
       metaData: {},
-      selectedLawn: ''
+      selectedLawn: '',
+      grassData: {}
     }
   },
   computed: {
@@ -75,11 +76,12 @@ export default {
     async lawnSelected() {
       let results = await util.fetchLawnData(this.selectedLawn)
       if (results) {
-        this.tiles = []
-        this.metaData = {}
+        let lawnData = JSON.parse(results.data.lawns.data)
+        console.log(results)
+        this.tiles = lawnData.data
+        this.metaData = lawnData.metaData
+        this.grassData = results.data.grass_types
       }
-      this.tiles = results.data.data
-      this.metaData = results.data.metaData
     },
     resetDatabase() {
       util.resetDatabase()

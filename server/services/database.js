@@ -45,7 +45,7 @@ module.exports = class Query {
 
 	resetDatabase() {
 		let drop = "DROP TABLE IF EXISTS lawns;"
-		let createLawnTable = "CREATE TABLE lawns (name TEXT, data TEXT);"
+		let createLawnTable = "CREATE TABLE lawns (name TEXT, data TEXT, grass_type_id INTEGER);"
 
 		this.db.prepare(drop).run()
 		this.db.prepare(createLawnTable).run()
@@ -53,8 +53,8 @@ module.exports = class Query {
 		let lawn1 = this.randomLawnConfiguration()
 		let lawn2 = this.randomLawnConfiguration()
 
-		this.addLawn('test1', JSON.stringify(lawn1))
-		this.addLawn('test2', JSON.stringify(lawn2))
+		this.addLawn('test1', JSON.stringify(lawn1), this.randomNum(10))
+		this.addLawn('test2', JSON.stringify(lawn2), this.randomNum(10))
 		// this.addLawn('test',JSON.stringify(
 		// 	{
 		// 		data: [
@@ -137,15 +137,20 @@ module.exports = class Query {
 	}
 
 	getLawn(name) {
-		let query = "SELECT data FROM lawns WHERE name = ?;"
+		let query = `
+			SELECT lawns.data, grass_types.*
+			FROM lawns
+			JOIN grass_types ON grass_types.ROWID = lawns.grass_type_id 
+			WHERE lawns.name = ?;
+		`
 		let params = [name];
 
-		return this.db.prepare(query).pluck(true).get(params)
+		return this.db.prepare(query).expand().get(params)
 	}
 
-	addLawn(name, data) {
-		let query = "INSERT INTO lawns (name, data) VALUES (?, ?);"
-		let params = [name, data];
+	addLawn(name, data, grass_type_id) {
+		let query = "INSERT INTO lawns (name, data, grass_type_id) VALUES (?, ?, ?);"
+		let params = [name, data, grass_type_id];
 
 		return this.db.prepare(query).run(params)
 	}
