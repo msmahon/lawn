@@ -61,6 +61,10 @@ export default {
   cursor: pointer;
 }
 
+.tile:hover {
+  border: 1px solid hsl(150, 80%, 78%);
+}
+
 .health-good {
   background-color: hsl(150, 56%, 30%);
 }

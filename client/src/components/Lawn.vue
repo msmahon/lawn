@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div id="lawn">
+      <div :style="gridStyle">
+        <Tile
+          v-for="tile in tiles"
+          :key="tile.id"
+          :tile-data="tile"
+          :selections="selections"
+          :current-selection="currentSelection"
+        />
+      </div>
+    </div>
     <select v-model="selectedLawn" @change="lawnSelected">
       <option
         v-for="lawn in lawns"
@@ -14,17 +25,6 @@
     <button @click="saveChanges">
       Save Changes
     </button>
-    <div id="lawn">
-      <div :style="gridStyle">
-        <Tile
-          v-for="tile in tiles"
-          :key="tile.id"
-          :tile-data="tile"
-          :selections="selections"
-          :current-selection="currentSelection"
-        />
-      </div>
-    </div>
   </div>
 </template>
 
@@ -98,6 +98,6 @@ export default {
 
 <style>
   #lawn {
-    padding: 24px;
+    margin: 0 24px;
   }
 </style>

@@ -2,13 +2,26 @@
   <div id="app">
     <div id="container">
       <div id="tile-modifiers" class="menu bgcolor-grey-100">
+        <div class="menu-title">
+          Tile Modifiers
+        </div>
+        <div class="options-title">
+          Conditions
+        </div>
         <Radio :options="conditionOptions" :current-selection="currentSelection" attribute="condition" />
+        <div class="options-title">
+          Health
+        </div>
         <Radio :options="healthOptions" :current-selection="currentSelection" attribute="health" />
       </div>
 
       <Lawn id="lawn" :selections="selections" :current-selection="currentSelection" />
 
-      <div class="menu bgcolor-grey-100" />
+      <div id="lawn-data" class="menu bgcolor-grey-100">
+        <div class="menu-title">
+          Lawn Data
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,14 +76,29 @@ export default {
 
 #container {
   display: flex;
-  justify-content: center;
 }
 
 .menu {
+  min-width: 200px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
-  width: 300px;
+  height: auto;
+}
+
+.menu-title {
+  /* font-size: 1.75em; */
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid hsl(150, 8%, 70%);
+  margin: 0 -20px;
+  padding-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.options-title {
+  font-weight: bold;
+  margin: 20px 0 5px;
 }
 
 .option-set {

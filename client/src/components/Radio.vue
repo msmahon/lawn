@@ -4,7 +4,7 @@
       <div :class="{ active: selected == option && currentSelection == attribute }" class="indicator">
         &nbsp;
       </div>
-      <div v-text="capitalize(option)" />
+      <div class="radio-text" v-text="capitalize(option)" />
     </div>
   </div>
 </template>
@@ -58,8 +58,6 @@ export default {
   background-color: rgb(255,255,255);
   border-radius: 4px;
   border: 1px solid hsl(150,8%, 80%);
-  margin: 10px 0 10px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .radio-option {
@@ -70,6 +68,10 @@ export default {
   padding: 10px;
   border-bottom: 1px solid hsl(150, 8%, 80%);
   width: auto;
+}
+
+.radio-text {
+  text-align: right;
 }
 
 .radio-option:last-child {
