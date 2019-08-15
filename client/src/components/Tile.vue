@@ -91,4 +91,8 @@ export default {
 .clover::after {
   content: '🍀';
 }
+
+.ants::after {
+  content: '🐜';
+}
 </style>

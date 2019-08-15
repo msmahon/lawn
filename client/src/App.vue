@@ -42,7 +42,7 @@ export default {
         condition: 'weeds'
       },
       currentSelection: 'health',
-      conditionOptions: ['weeds', 'clover'],
+      conditionOptions: ['weeds', 'clover', 'ants'],
       healthOptions: ['good', 'fair', 'dead']
     }
   },
