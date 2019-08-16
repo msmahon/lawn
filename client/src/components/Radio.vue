@@ -1,6 +1,11 @@
 <template>
   <div class="radio-menu">
-    <div v-for="option in options" :key="option" class="radio-option" @click="select(option)">
+    <div
+      v-for="option in options"
+      :key="option"
+      class="radio-option"
+      @click="select(option)"
+    >
       <div :class="{ active: selected == option && currentSelection == attribute }" class="indicator">
         &nbsp;
       </div>
