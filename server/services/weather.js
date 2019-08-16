@@ -8,6 +8,19 @@ module.exports = class Query {
 
 	async getForecast() {
 		let forecast = await axios.get(this.endpoint)
-		return forecast
+		let trimmedForecast = []
+
+		
+		forecast.data.list.forEach(day => {
+			while (trimmedForecast.length < 5) {
+				trimmedForecast.push({
+					min: day.main.temp_min,
+					max: day.main.temp_max,
+					description: day.weather[0].main
+				})
+			}
+		});
+
+		return trimmedForecast
 	}
 };

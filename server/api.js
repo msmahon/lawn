@@ -35,9 +35,8 @@ router.post('/lawn/save', function(req, res, next) {
 	return db.saveLawn(req.body.data, req.body.name)
 })
 
-router.get('/weather/', function(req, res, next) {
-	let forecast = weather.getForecast()
-	console.log(forecast)
+router.get('/weather/', async function(req, res, next) {
+	let forecast = await weather.getForecast()
 	res.send(forecast)
 })
 
