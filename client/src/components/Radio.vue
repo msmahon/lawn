@@ -61,8 +61,8 @@ export default {
 .radio-menu {
   position: relative;
   background-color: rgb(255,255,255);
-  border-radius: 4px;
-  border: 1px solid hsl(150,8%, 80%);
+  border-radius: 6px;
+  border: 1px solid hsl(150,8%, 70%);
 }
 
 .radio-option {
@@ -71,7 +71,7 @@ export default {
   justify-content: center;
   width: 100%;
   padding: 10px;
-  border-bottom: 1px solid hsl(150, 8%, 80%);
+  border-bottom: 1px solid hsl(150, 8%, 70%);
   width: auto;
 }
 
@@ -84,7 +84,7 @@ export default {
 }
 
 .radio-option:hover {
-  background-color: hsl(150, 8%, 80%);
+  background-color: hsl(150, 8%, 90%);
 }
 
 .indicator {

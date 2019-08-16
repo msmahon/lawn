@@ -5,17 +5,17 @@
         <div class="menu-title color-grey-700">
           Tile Modifiers
         </div>
-        <div class="options-title  color-grey-600">
+        <div class="options-title color-grey-700">
           Conditions
         </div>
         <Radio :options="conditionOptions" :current-selection="currentSelection" attribute="condition" />
-        <div class="options-title  color-grey-600">
+        <div class="options-title color-grey-800">
           Health
         </div>
         <Radio :options="healthOptions" :current-selection="currentSelection" attribute="health" />
       </div>
 
-      <Lawn id="lawn" :selections="selections" :current-selection="currentSelection" />
+      <Lawn :selections="selections" :current-selection="currentSelection" />
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
         <div class="menu-title color-grey-700">
@@ -81,7 +81,7 @@ export default {
 .menu {
   min-width: 200px;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
   height: auto;
 }
@@ -97,7 +97,6 @@ export default {
 }
 
 .options-title {
-  font-weight: bold;
   margin: 20px 0 5px;
 }
 
