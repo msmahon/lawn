@@ -87,6 +87,16 @@ export default {
   background-color: hsl(150, 8%, 90%);
 }
 
+.radio-option:last-child:hover {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.radio-option:first-child:hover {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
 .indicator {
   position: absolute;
   border-radius: 50%;
