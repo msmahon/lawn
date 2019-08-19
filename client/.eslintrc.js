@@ -11,7 +11,9 @@ module.exports = {
 				'allowFirstLine': false
 			}
 		}],
-		"includeCommonJSModuleExports": true
+		"includeCommonJSModuleExports": true,
+		"vue/multiline-html-element-content-newline": false,
+		"vue/singleline-html-element-content-newline": false,
 	},
 	env: {
 		"es6": true
