@@ -19,6 +19,25 @@ h1 {
 	text-shadow: 1px 3px hsl(150, 90%, 20%); /* primary-900 */
 }
 
+.button {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	height: fit-content;
+	width: fit-content;
+	padding: 5px 10px;
+	border-radius: 6px;
+	font-weight: bold;
+	border: 1px solid hsl(150, 8%, 70%);
+}
+
+.button-primary {
+	color: hsl(150, 90%, 18%);
+	background-color: hsl(150, 80%, 78%);
+	border-color: hsl(150, 60%, 40%) ;
+}
+
 .color-primary-100 { color: hsl(150, 90%, 85%) }
 .color-primary-200 { color: hsl(150, 80%, 78%) }
 .color-primary-300 { color: hsl(150, 70%, 70%) }
