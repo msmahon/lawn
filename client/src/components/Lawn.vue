@@ -7,7 +7,7 @@
           :key="tile.id"
           :tile-data="tile"
           :selections="selections"
-          :current-selection="currentSelection"
+          :current-selection="selections.current"
         />
       </div>
     </div>
@@ -39,10 +39,6 @@ export default {
     selections: {
       type: Object,
       default: Object
-    },
-    currentSelection: {
-      type: String,
-      default: 'health'
     }
   },
   data: function() {

@@ -3,18 +3,18 @@
     <div id="container">
       <div id="tile-modifiers" class="menu bgcolor-grey-100">
         <div class="menu-title color-grey-700">Tile Modifiers</div>
+
         <div class="options-title color-grey-700">Conditions</div>
-        <Radio :options="conditionOptions" :current-selection="currentSelection" attribute="condition" />
+        <Radio :options="conditionOptions" :current-selection="selections.current" attribute="condition" />
+
         <div class="options-title color-grey-800">Health</div>
-        <Radio :options="healthOptions" :current-selection="currentSelection" attribute="health" />
+        <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <Lawn :selections="selections" :current-selection="currentSelection" />
+      <Lawn :selections="selections" :current-selection="selections.current" />
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
-        <div class="menu-title color-grey-700">
-          Lawn Data
-        </div>
+        <div class="menu-title color-grey-700">Lawn Data</div>
       </div>
     </div>
   </div>
@@ -33,25 +33,21 @@ export default {
     return {
       selections: {
         health: 'good',
-        condition: 'weeds'
+        condition: 'weeds',
+        current: 'health'
       },
-      currentSelection: 'health',
       conditionOptions: ['weeds', 'clover', 'ants'],
       healthOptions: ['good', 'fair', 'dead']
     }
   },
   created() {
     EventBus.$on('attributeUpdate', (payload) => {
-      console.log(this.selections)
-      this.currentSelection = payload[0]
+      this.selections.current = payload[0]
       this.selections[payload[0]] = payload[1]
     })
   },
   methods: {
-    test: function() {
-      let response = axios.get('/api/');
-      response.then(console.log);
-    }
+    
   }
 }
 </script>
