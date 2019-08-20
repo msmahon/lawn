@@ -45,19 +45,19 @@ export default {
     return {
       lawns: [],
       tiles: [],
-      metaData: {},
+      columns: {},
       selectedLawn: '',
       grassData: {}
     }
   },
   computed: {
     gridStyle() {
-      let rows = this.tiles.length / this.metaData.columns
+      let rows = this.tiles.length / this.columns
       return {
         display: 'grid',
         backgroundColor: 'white',
         gridTemplateRows: `repeat(${rows},1fr)`,
-        gridTemplateColumns: `repeat(${this.metaData.columns},1fr)`,
+        gridTemplateColumns: `repeat(${this.columns},1fr)`,
       }
     }
   },
@@ -71,12 +71,11 @@ export default {
   methods: {
     async lawnSelected() {
       let results = await util.fetchLawnData(this.selectedLawn)
+      results = results.data
       if (results) {
-        let lawnData = JSON.parse(results.data.lawns.data)
-        console.log(results)
-        this.tiles = lawnData.data
-        this.metaData = lawnData.metaData
-        this.grassData = results.data.grass_types
+        this.tiles = JSON.parse(results.lawns.data)
+        this.columns = results.lawns.columns
+        this.grassData = results.grass_types
       }
     },
     resetDatabase() {
@@ -85,7 +84,7 @@ export default {
     async saveChanges() {
       let data = {
         "data": this.tiles,
-        "metaData": this.metaData
+        "columns": this.columns
       }
       let response = await util.saveLawn(data, this.selectedLawn)
       console.log(response)

@@ -9,7 +9,7 @@ module.exports = class Query {
 		let data = []
 		let metaData = {}
 		const healthOptions = ['good', 'fair', 'dead']
-		const conditionOptions = ['clover', 'weeds']
+		const conditionOptions = ['clover', 'weeds', 'ants']
 
 		let maxWidth = 12
 		let maxHeight = 6
@@ -45,7 +45,7 @@ module.exports = class Query {
 
 	resetDatabase() {
 		let drop = "DROP TABLE IF EXISTS lawns;"
-		let createLawnTable = "CREATE TABLE lawns (name TEXT, data TEXT, zip INTEGER, grass_type_id INTEGER);"
+		let createLawnTable = "CREATE TABLE lawns (name TEXT, data TEXT, columns INTEGER, zip INTEGER, grass_type_id INTEGER);"
 
 		this.db.prepare(drop).run()
 		this.db.prepare(createLawnTable).run()
@@ -53,8 +53,8 @@ module.exports = class Query {
 		let lawn1 = this.randomLawnConfiguration()
 		let lawn2 = this.randomLawnConfiguration()
 
-		this.addLawn('test1', JSON.stringify(lawn1), 29601, this.randomNum(10))
-		this.addLawn('test2', JSON.stringify(lawn2), 97008, this.randomNum(10))
+		this.addLawn('test1', JSON.stringify(lawn1.data), lawn1.metaData.columns, 29601, this.randomNum(10))
+		this.addLawn('test2', JSON.stringify(lawn2.data),lawn2.metaData.columns, 97008, this.randomNum(10))
 		// this.addLawn('test',JSON.stringify(
 		// 	{
 		// 		data: [
@@ -138,7 +138,7 @@ module.exports = class Query {
 
 	getLawn(name) {
 		let query = `
-			SELECT lawns.data, grass_types.*
+			SELECT lawns.data, lawns.columns, grass_types.*
 			FROM lawns
 			JOIN grass_types ON grass_types.ROWID = lawns.grass_type_id 
 			WHERE lawns.name = ?;
@@ -148,22 +148,20 @@ module.exports = class Query {
 		return this.db.prepare(query).expand().get(params)
 	}
 
-	addLawn(name, data, zip, grass_type_id) {
-		let query = "INSERT INTO lawns (name, data, zip, grass_type_id) VALUES (?, ?, ?, ?);"
-		let params = [name, data, zip, grass_type_id];
+	addLawn(name, data, columns, zip, grass_type_id) {
+		let query = "INSERT INTO lawns (name, data, columns, zip, grass_type_id) VALUES (?, ?, ?, ?, ?);"
+		let params = [name, data, columns, zip, grass_type_id];
 
 		return this.db.prepare(query).run(params)
 	}
 
 	getLawnNames() {
 		let query = "SELECT name FROM lawns;"
-		
+
 		return this.db.prepare(query).all()
 	}
 
 	saveLawn(data, name) {
-		console.log(data)
-		console.log(name)
 		let query = "UPDATE lawns SET data = ? WHERE name = ?;"
 
 		return this.db.prepare(query).run(JSON.stringify(data), name)
