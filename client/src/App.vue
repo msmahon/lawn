@@ -11,7 +11,23 @@
         <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <Lawn :selections="selections" :current-selection="selections.current" />
+      <div class="menu bgcolor-grey-100">
+        <Lawn :selections="selections" :data="selectedLawn" :current-selection="selections.current" />
+        <select v-model="selectedLawn.name" @change="lawnSelected">
+          <option
+            v-for="lawn in lawns"
+            :key="lawn.name"
+            :value="lawn.name"
+            v-text="lawn.name"
+          />
+        </select>
+        <button @click="resetDatabase">
+          Reset Database
+        </button>
+        <button @click="saveChanges">
+          Save Changes
+        </button>
+      </div>
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
         <div class="menu-title color-grey-700">Lawn Data</div>
@@ -22,6 +38,7 @@
 
 <script>
 import {EventBus} from './EventBus'
+import util from './utilities'
 import Lawn from './components/Lawn.vue'
 import Radio from './components/Radio.vue'
 import axios from 'axios'
@@ -37,7 +54,14 @@ export default {
         current: 'health'
       },
       conditionOptions: ['weeds', 'clover', 'ants'],
-      healthOptions: ['good', 'fair', 'dead']
+      healthOptions: ['good', 'fair', 'dead'],
+      lawns: [],
+      selectedLawn: {
+        name: '',
+        tiles: null,
+        columns: null
+      },
+      grassData: {}
     }
   },
   created() {
@@ -46,8 +70,35 @@ export default {
       this.selections[payload[0]] = payload[1]
     })
   },
+  async mounted() {
+    this.lawns = await util.getLawns()
+    if (this.lawns.length > 0) {
+      this.selectedLawn.name = this.lawns[0].name
+      this.lawnSelected()
+    }
+  },
   methods: {
-    
+    async lawnSelected() {
+      let results = await util.fetchLawnData(this.selectedLawn.name)
+      results = results.data
+      if (results) {
+        this.selectedLawn.tiles = JSON.parse(results.lawns.data)
+        this.selectedLawn.columns = results.lawns.columns
+        this.grassData = results.grass_types
+      }
+    },
+    resetDatabase() {
+      util.resetDatabase()
+    },
+    async saveChanges() {
+      let data = {
+        "data": this.tiles,
+        "columns": this.columns
+      }
+      let response = await util.saveLawn(data, this.selectedLawn)
+      console.log(response)
+      // Visually alert user lawn has been saved
+    }
   }
 }
 </script>
@@ -71,7 +122,8 @@ export default {
 .menu {
   min-width: 200px;
   padding: 20px;
-  border-radius: 6px;
+  margin: 10px;
+  border-radius: 10px;
   box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
   height: auto;
 }
