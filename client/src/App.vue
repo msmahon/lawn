@@ -4,14 +4,14 @@
       <div id="tile-modifiers" class="menu bgcolor-grey-100">
         <div class="menu-title color-grey-700">Tile Modifiers</div>
 
-        <div class="options-title color-grey-700">Conditions</div>
+        <div class="option-set-title color-grey-700">Conditions</div>
         <Radio :options="conditionOptions" :current-selection="selections.current" attribute="condition" />
 
-        <div class="options-title color-grey-800">Health</div>
+        <div class="option-set-title color-grey-800">Health</div>
         <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <div class="menu bgcolor-grey-100">
+      <div id="lawn-container" class="menu bgcolor-grey-100">
         <Lawn :selections="selections" :data="selectedLawn" :current-selection="selections.current" />
         <select v-model="selectedLawn.name" @change="lawnSelected">
           <option
@@ -21,17 +21,25 @@
             v-text="lawn.name"
           />
         </select>
-        <button @click="resetDatabase">
+        <div class="button" @click="resetDatabase">
           Reset Database
-        </button>
-        <button @click="saveChanges">
+        </div>
+        <div class="button" @click="saveChanges">
           Save Changes
-        </button>
+        </div>
       </div>
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
         <div class="menu-title color-grey-700">Lawn Data</div>
+        <div class="option-set">
+          <div class="option option-title"><span colspan="2" v-text="grassData.name" /></div>
+          <div v-for="(value, key) in sortedGrassData" :key="key" class="option">
+            <div v-text="value.name" class="option-title" /><div v-text="value.content" class="option-value"/>
+          </div>
+        </div>
       </div>
+
+      <div id="weather" class="menu bgcolor-grey-100" />
     </div>
   </div>
 </template>
@@ -62,6 +70,19 @@ export default {
         columns: null
       },
       grassData: {}
+    }
+  },
+  computed: {
+    sortedGrassData() {
+      return [
+        { "name": "Color", "content": this.grassData.color },
+        { "name": "Season", "content": this.grassData.season },
+        { "name": "Blade", "content": this.grassData.blade },
+        { "name": "Growth", "content": this.grassData.growth },
+        { "name": "Season", "content": this.grassData.season },
+        { "name": "Water", "content": this.grassData.water },
+        { "name": "Texture", "content": this.grassData.texture },
+      ]
     }
   },
   created() {
@@ -110,13 +131,34 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 }
 
 #container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto 200px;
+  grid-template-areas:
+    "l_sidebar main r_sidebar"
+    "weather weather weather";
+}
+
+#tile-modifiers {
+  grid-area: l_sidebar
+}
+
+#lawn-container {
+  grid-area: main
+}
+
+#lawn-data {
+  grid-area: r_sidebar
+}
+
+#weather {
+  grid-area: weather
 }
 
 .menu {
@@ -138,26 +180,38 @@ export default {
   letter-spacing: 2px;
 }
 
-.options-title {
+.option-set-title {
   margin: 20px 0 5px;
 }
 
 .option-set {
   background-color: rgb(255,255,255);
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid hsl(150,8%, 80%);
   width: 100%;
   margin: 10px 0 10px 0;
 }
 
 .menu .option {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  padding: 4px;
+  padding: 8px;
   border-bottom: 1px solid hsl(150, 8%, 80%);
   width: auto;
+}
+
+.option-title {
+  font-weight: bold;
+}
+
+.option-value {
+  margin-left: 20px;
 }
 
 .menu .option:last-child {
   border: none;
 }
+
+
 </style>

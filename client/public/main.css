@@ -26,10 +26,16 @@ h1 {
 	text-align: center;
 	height: fit-content;
 	width: fit-content;
+	margin: 5px;
 	padding: 5px 10px;
 	border-radius: 6px;
 	font-weight: bold;
 	border: 1px solid hsl(150, 8%, 70%);
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: hsl(150, 8%, 70%);
 }
 
 .button-primary {
