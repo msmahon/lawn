@@ -3,9 +3,11 @@ var express = require('express')
 var router = express.Router()
 var Query = require('./services/database.js')
 var Weather = require('./services/weather.js')
+var Event = require('./services/event.js')
 
 let db = new Query('lawn.db')
 let weather = new Weather()
+let events = new Event(db)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -33,6 +35,11 @@ router.post('/lawn/add', function(req, res, next) {
 
 router.post('/lawn/save', function(req, res, next) {
 	return db.saveLawn(req.body.data, req.body.name)
+})
+
+router.get('/events/:name', function(req, res, next) {
+	let results = events.recentEvents(req.params.name)
+	res.send(results)
 })
 
 router.get('/weather/', async function(req, res, next) {

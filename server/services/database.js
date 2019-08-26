@@ -166,4 +166,12 @@ module.exports = class Query {
 
 		return this.db.prepare(query).run(JSON.stringify(data), name)
 	}
+
+
+	// Events
+	getAllEvents(lawn, days) {
+		let query = "SELECT * FROM events WHERE events.lawn_name = ? ORDER BY created DESC LIMIT 5;"
+
+		return this.db.prepare(query).get(lawn)
+	}
 };

@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <div id="weather" class="menu bgcolor-grey-100" />
+      <Events id="events" class="menu bgcolor-grey-100" :lawn="selectedLawn.name" />
     </div>
   </div>
 </template>
@@ -49,11 +49,12 @@ import {EventBus} from './EventBus'
 import util from './utilities'
 import Lawn from './components/Lawn.vue'
 import Radio from './components/Radio.vue'
+import Events from './components/Events.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
-  components: {Lawn, Radio},
+  components: {Lawn, Radio, Events},
   data() {
     return {
       selections: {
@@ -142,7 +143,7 @@ export default {
   grid-template-rows: auto 200px;
   grid-template-areas:
     "l_sidebar main r_sidebar"
-    "weather weather weather";
+    "events events events";
 }
 
 #tile-modifiers {
@@ -157,8 +158,8 @@ export default {
   grid-area: r_sidebar
 }
 
-#weather {
-  grid-area: weather
+#events {
+  grid-area: events
 }
 
 .menu {
