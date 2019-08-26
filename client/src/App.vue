@@ -34,7 +34,7 @@
         <div class="option-set">
           <div class="option option-title"><span colspan="2" v-text="grassData.name" /></div>
           <div v-for="(value, key) in sortedGrassData" :key="key" class="option">
-            <div v-text="value.name" class="option-title" /><div v-text="value.content" class="option-value"/>
+            <div class="option-title" v-text="value.name" /><div class="option-value" v-text="value.content" />
           </div>
         </div>
       </div>
