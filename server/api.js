@@ -7,7 +7,7 @@ var Event = require('./services/event.js')
 
 let db = new Query('lawn.db')
 let weather = new Weather()
-let events = new Event(db)
+let events = new Event()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
