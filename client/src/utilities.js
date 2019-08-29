@@ -11,11 +11,7 @@ export default {
         let result = await axios.get('/api/getLawns')
         return result.data
     },
-    saveLawn(data, name) {
-        let request = {
-            "data": data,
-            "name": name
-        }
-        return axios.post('/api/lawn/save', request)
+    saveLawn(data) {
+        return axios.post('/api/lawn/save', data)
     }
 }

@@ -34,7 +34,7 @@ router.post('/lawn/add', function(req, res, next) {
 })
 
 router.post('/lawn/save', function(req, res, next) {
-	return db.saveLawn(req.body.data, req.body.name)
+	return db.saveLawn(req.body)
 })
 
 router.get('/events/:name', function(req, res, next) {
