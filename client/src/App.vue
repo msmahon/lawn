@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <Events id="events" class="menu bgcolor-grey-100" :lawn="selectedLawn.name" />
+      <EventList class="menu bgcolor-grey-100" :lawn="selectedLawn.name" />
     </div>
   </div>
 </template>
@@ -49,12 +49,12 @@ import {EventBus} from './EventBus'
 import util from './utilities'
 import Lawn from './components/Lawn.vue'
 import Radio from './components/Radio.vue'
-import Events from './components/Events.vue'
+import EventList from './components/EventList.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
-  components: {Lawn, Radio, Events},
+  components: {Lawn, Radio, EventList},
   data() {
     return {
       selections: {
@@ -113,11 +113,7 @@ export default {
       util.resetDatabase()
     },
     async saveChanges() {
-      let data = {
-        "data": this.tiles,
-        "columns": this.columns
-      }
-      let response = await util.saveLawn(data, this.selectedLawn)
+      let response = await util.saveLawn(this.selectedLawn)
       console.log(response)
       // Visually alert user lawn has been saved
     }
@@ -143,7 +139,7 @@ export default {
   grid-template-rows: auto 200px;
   grid-template-areas:
     "l_sidebar main r_sidebar"
-    "events events events";
+    "event-list event-list event-list";
 }
 
 #tile-modifiers {
@@ -158,8 +154,8 @@ export default {
   grid-area: r_sidebar
 }
 
-#events {
-  grid-area: events
+#event-list {
+  grid-area: event-list
 }
 
 .menu {

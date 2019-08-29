@@ -31,5 +31,6 @@ export default {
 #event-list {
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 }
 </style>
