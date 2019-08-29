@@ -1,4 +1,5 @@
 const Database = require('better-sqlite3')
+const Seeder = require('./seeder')
 
 module.exports = class Query {
 	constructor(database) {
@@ -50,51 +51,12 @@ module.exports = class Query {
 		this.db.prepare(drop).run()
 		this.db.prepare(createLawnTable).run()
 
-		let lawn1 = this.randomLawnConfiguration()
-		let lawn2 = this.randomLawnConfiguration()
+		let lawn1 = (new Seeder()).createLawn()
+		let lawn2 = (new Seeder()).createLawn()
 
 		this.addLawn('test1', JSON.stringify(lawn1.data), lawn1.metaData.columns, 29601, this.randomNum(10))
 		this.addLawn('test2', JSON.stringify(lawn2.data),lawn2.metaData.columns, 97008, this.randomNum(10))
-		// this.addLawn('test',JSON.stringify(
-		// 	{
-		// 		data: [
-		// 			{id: 1, health: 'good', conditions: []},
-		// 			{id: 2, health: 'good', conditions: []},
-		// 			{id: 3, health: 'good', conditions: []},
-		// 			{id: 4, health: 'good', conditions: []},
-		// 			{id: 5, health: 'good', conditions: []},
-		// 			{id: 6, health: 'good', conditions: []},
-		// 			{id: 7, health: 'good', conditions: []},
-		// 			{id: 8, health: 'good', conditions: []},
-		// 			{id: 9, health: 'good', conditions: []},
-		// 			{id: 10, health: 'good', conditions: []},
-		// 			{id: 11, health: 'good', conditions: []},
-		// 			{id: 12, health: 'good', conditions: []}
-		// 		],
-		// 		metaData: {
-		// 			columns: 4
-		// 		}
-		// 	}
-		// ))
-
-		// this.addLawn('test2',JSON.stringify(
-		// 	{
-		// 		data: [
-		// 			{id: 1, health: 'good', conditions: []},
-		// 			{id: 2, health: 'good', conditions: []},
-		// 			{id: 3, health: 'good', conditions: []},
-		// 			{id: 4, health: 'good', conditions: []},
-		// 			{id: 5, health: 'good', conditions: []},
-		// 			{id: 6, health: 'good', conditions: []},
-		// 			{id: 7, health: 'good', conditions: []},
-		// 			{id: 8, health: 'good', conditions: []}
-		// 		],
-		// 		metaData: {
-		// 			columns: 4
-		// 		}
-		// 	}
-		// ))
-
+		
 		this.createGrassTable()
 	}
 
