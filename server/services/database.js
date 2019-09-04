@@ -3,7 +3,7 @@ const Seeder = require('./seeder')
 
 module.exports = class Query {
 	constructor(database) {
-		this.db = Database(database, {verbose: console.log})
+		this.connection = Database(database, {verbose: console.log})
 	}
 
 	randomLawnConfiguration() {
@@ -48,8 +48,8 @@ module.exports = class Query {
 		let drop = "DROP TABLE IF EXISTS lawns;"
 		let createLawnTable = "CREATE TABLE lawns (name TEXT, data TEXT, columns INTEGER, zip INTEGER, grass_type_id INTEGER);"
 
-		this.db.prepare(drop).run()
-		this.db.prepare(createLawnTable).run()
+		this.connection.prepare(drop).run()
+		this.connection.prepare(createLawnTable).run()
 
 		let lawn1 = (new Seeder()).createLawn()
 		let lawn2 = (new Seeder()).createLawn()
@@ -73,8 +73,8 @@ module.exports = class Query {
 			image_url TEXT
 		);`
 
-		this.db.prepare(drop).run()
-		this.db.prepare(createGrassTable).run()
+		this.connection.prepare(drop).run()
+		this.connection.prepare(createGrassTable).run()
 
 		let grasses = [
 			{ name: "Bentgrass",			blade: "narrow, flat",			color: "green",					texture: "soft, dense",		growth: "slow",	water: "frequent",		season: "cool", image_url: "#"},
@@ -89,9 +89,9 @@ module.exports = class Query {
 			{ name: "Zoysia",				blade: "narrow, needle-like",	color: "green",					texture: "prickly, stiff",	growth: "slow",	water: "average",		season: "warm", image_url: "#"}
 		]
 
-		let insert = this.db.prepare("INSERT INTO grass_types (name, blade, color, texture, growth, water, season, image_url) VALUES (@name, @blade, @color, @texture, @growth, @water, @season, @image_url);")
+		let insert = this.connection.prepare("INSERT INTO grass_types (name, blade, color, texture, growth, water, season, image_url) VALUES (@name, @blade, @color, @texture, @growth, @water, @season, @image_url);")
 
-		let insertMany = this.db.transaction((grasses) => {
+		let insertMany = this.connection.transaction((grasses) => {
 			for (const grass of grasses) insert.run(grass)
 		})
 
@@ -107,25 +107,25 @@ module.exports = class Query {
 		`
 		let params = [name];
 
-		return this.db.prepare(query).expand().get(params)
+		return this.connection.prepare(query).expand().get(params)
 	}
 
 	addLawn(name, data, columns, zip, grass_type_id) {
 		let query = "INSERT INTO lawns (name, data, columns, zip, grass_type_id) VALUES (?, ?, ?, ?, ?);"
 		let params = [name, data, columns, zip, grass_type_id];
 
-		return this.db.prepare(query).run(params)
+		return this.connection.prepare(query).run(params)
 	}
 
 	getLawnNames() {
 		let query = "SELECT name FROM lawns;"
 
-		return this.db.prepare(query).all()
+		return this.connection.prepare(query).all()
 	}
 
 	saveLawn(data) {
 		let query = "UPDATE lawns SET data = ? WHERE name = ?;"
-		return this.db.prepare(query).run(JSON.stringify(data.tiles), data.name)
+		return this.connection.prepare(query).run(JSON.stringify(data.tiles), data.name)
 	}
 
 
@@ -133,6 +133,6 @@ module.exports = class Query {
 	getAllEvents(lawn, days) {
 		let query = "SELECT * FROM events WHERE events.lawn_name = ? ORDER BY created DESC LIMIT 5;"
 
-		return this.db.prepare(query).get(lawn)
+		return this.connection.prepare(query).get(lawn)
 	}
 };
