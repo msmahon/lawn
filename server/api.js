@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 var express = require('express')
 var router = express.Router()
-var Query = require('./services/database.js')
+var Database = require('./services/database.js')
 var Weather = require('./services/weather.js')
 var Event = require('./services/event.js')
 
-let db = new Query('lawn.db')
+let db = new Database()
 let weather = new Weather()
 let events = new Event()
 
