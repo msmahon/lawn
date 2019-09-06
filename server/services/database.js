@@ -2,7 +2,7 @@ const Database = require('better-sqlite3')
 const Seeder = require('./seeder')
 
 module.exports = class Query {
-	constructor(database) {
+	constructor(database = 'lawn.db') {
 		this.connection = Database(database, {verbose: console.log})
 	}
 
