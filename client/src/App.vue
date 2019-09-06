@@ -11,8 +11,12 @@
         <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <div id="lawn-container" class="menu bgcolor-grey-100">
-        <Lawn :selections="selections" :data="selectedLawn" :current-selection="selections.current" />
+      <div v-if="!noLawns" id="lawn-container" class="menu bgcolor-grey-100">
+        <Lawn
+          :selections="selections"
+          :data="selectedLawn"
+          :current-selection="selections.current"
+        />
         <select v-model="selectedLawn.name" @change="lawnSelected">
           <option
             v-for="lawn in lawns"
@@ -26,6 +30,19 @@
         </div>
         <div class="button" @click="saveChanges">
           Save Changes
+        </div>
+      </div>
+
+      <div v-if="noLawns" id="addLawnMenu" class="menu bgcolor-grey-100">
+        <h2>Create a new Lawn</h2>
+        <div>
+          <input type="text" name="name" id="lawnName">
+          <input type="range" name="width" id="lawnWidth">
+          <input type="range" name="height" id="lawnHeight">
+          <input type="text" name="zip" id="lawnZip">
+          <select name="grassType" id="lawnGrassType">
+            <option v-for="(value, key) in grassTypes" :key="key" />
+          </select>
         </div>
       </div>
 
@@ -70,7 +87,9 @@ export default {
         tiles: null,
         columns: null
       },
-      grassData: {}
+      grassData: {},
+      grassTypes: [],
+      noLawns: true
     }
   },
   computed: {
@@ -95,9 +114,12 @@ export default {
   async mounted() {
     this.lawns = await util.getLawns()
     if (this.lawns.length > 0) {
+      this.noLawns = false
       this.selectedLawn.name = this.lawns[0].name
       this.lawnSelected()
     }
+
+    this.grassTypes = await util.getGrassTypes()
   },
   methods: {
     async lawnSelected() {
@@ -143,19 +165,24 @@ export default {
 }
 
 #tile-modifiers {
-  grid-area: l_sidebar
+  grid-area: l_sidebar;
 }
 
 #lawn-container {
-  grid-area: main
+  grid-area: main;
+  min-width: 600px;
 }
 
 #lawn-data {
-  grid-area: r_sidebar
+  grid-area: r_sidebar;
 }
 
 #event-list {
-  grid-area: event-list
+  grid-area: event-list;
+}
+
+#addLawnMenu {
+  min-width: 600px;
 }
 
 .menu {
