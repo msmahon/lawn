@@ -8,7 +8,11 @@ export default {
         return axios.post('/api/lawn/reset')
     },
     async getLawns() {
-        let result = await axios.get('/api/getLawns')
+        let result = await axios.get('/api/Lawns')
+        return result.data
+    },
+    async getGrassTypes() {
+        let result = await axios.get('/api/GrassTypes')
         return result.data
     },
     saveLawn(data) {

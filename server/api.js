@@ -9,6 +9,8 @@ let db = new Database()
 let weather = new Weather()
 let events = new Event()
 
+var Lawn = require('./models/lawn')
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.send('test')
@@ -19,8 +21,13 @@ router.get('/lawn/:name', function (req, res, next) {
   res.send(data)
 })
 
-router.get('/getLawns', function(req, res, next) {
+router.get('/Lawns', function(req, res, next) {
 	let result = db.getLawnNames()
+	res.send(result)
+})
+
+router.get('/grassTypes', function(req, res, next) {
+	let result = db.getGrassTypes()
 	res.send(result)
 })
 
@@ -34,7 +41,8 @@ router.post('/lawn/add', function(req, res, next) {
 })
 
 router.post('/lawn/save', function(req, res, next) {
-	return db.saveLawn(req.body)
+	// return db.saveLawn(req.body);
+	let lawn = new Lawn(req.body)
 })
 
 router.get('/events/:name', function(req, res, next) {
