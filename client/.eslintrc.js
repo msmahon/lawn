@@ -5,7 +5,7 @@ module.exports = {
 	rules: {
 		"no-console": "off",
 		'vue/max-attributes-per-line': [2, {
-			'singleline': 3,
+			'singleline': 10,
 			'multiline': {
 				'max': 1,
 				'allowFirstLine': false
