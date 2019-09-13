@@ -54,5 +54,6 @@ export default {
 <style>
 #lawn {
   margin-bottom: 10px;
+  width: fit-content;
 }
 </style>

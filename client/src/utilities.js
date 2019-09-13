@@ -17,5 +17,18 @@ export default {
     },
     saveLawn(data) {
         return axios.post('/api/lawn/save', data)
+    },
+    saveNewLawn(newLawn) {
+        let data = {}
+        data.name = newLawn.name
+        data.columns = newLawn.width
+        data.zip = newLawn.zip
+        data.grass_type_id = newLawn.grass_type_id
+
+        data.tiles = []
+        for (let i = 0; i < newLawn.width * newLawn.height; i++) {
+            data.tiles.push({ id: i, health: 'good', conditions: [] });
+        }
+        this.saveLawn(data)
     }
 }

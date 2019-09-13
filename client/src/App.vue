@@ -11,12 +11,14 @@
         <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <div v-if="!noLawns" id="lawn-container" class="menu bgcolor-grey-100">
-        <Lawn
-          :selections="selections"
-          :data="selectedLawn"
-          :current-selection="selections.current"
-        />
+      <div v-if="!noLawns" class="menu bgcolor-grey-100">
+        <div id="lawn-container">
+          <Lawn
+            :selections="selections"
+            :data="selectedLawn"
+            :current-selection="selections.current"
+          />
+        </div>
         <select v-model="selectedLawn.name" @change="lawnSelected">
           <option
             v-for="lawn in lawns"
@@ -36,25 +38,26 @@
       <div v-if="noLawns" id="add-lawn-menu" class="menu bgcolor-grey-100">
         <h2>Create a new Lawn</h2>
         <div>
-          <input id="lawn-name" type="text" name="name" placeholder="My Lawn"><br>
-          <input id="lawn-width" type="range" name="width" min="4" max="12" v-model.number="lawnWidth"><br>
-          <input id="lawn-height" type="range" name="height" min="4" max="8" v-model.number="lawnHeight"><br>
-          <input id="lawn-zip" type="text" name="zip" placeholder="ZIP"><br>
-          <select id="lawn-grass-type" name="grassType">
-            <option value="">-SELECT ONE-</option>
+          <input id="lawn-name" v-model="newLawn.name" type="text" name="name" placeholder="My Lawn"><br>
+          <input id="lawn-width" v-model.number="newLawn.width" type="range" name="width" min="4" max="12"><br>
+          <input id="lawn-height" v-model.number="newLawn.height" type="range" name="height" min="4" max="8"><br>
+          <input id="lawn-zip" v-model="newLawn.zip" type="text" name="zip" placeholder="ZIP"><br>
+          <select id="lawn-grass-type" v-model="newLawn.grass_type_id" name="grassType">
+            <option value="null">-SELECT ONE-</option>
             <option
               v-for="(value, key) in grassTypes"
               :key="key"
-              :value="value.name"
+              :value="value.rowid"
               v-text="value.name"
             />
           </select>
           <div id="lawn-size-preview">
-            <div v-for="(value, key) in lawnWidth" :key="key">
-              <div v-for="(value, key) in lawnHeight" :key="key" class="lawn-cell"></div>
+            <div v-for="(widthValue, widthKey) in newLawn.width" :key="widthKey">
+              <div v-for="(heightValue, heightKey) in newLawn.height" :key="heightKey" class="lawn-cell" />
             </div>
           </div>
         </div>
+        <div class="button" @click="saveNewLawn">Save</div>
       </div>
 
       <div id="lawn-data" class="menu bgcolor-grey-100">
@@ -99,8 +102,13 @@ export default {
       grassTypes: [],
       noLawns: true,
 
-      lawnWidth: 4,
-      lawnHeight: 4
+      newLawn: {
+        name: '',
+        width: 4,
+        height: 4,
+        zip: null,
+        grass_type_id: null
+      }
     }
   },
   computed: {
@@ -152,8 +160,12 @@ export default {
 
     async saveChanges() {
       let response = await util.saveLawn(this.selectedLawn)
-      console.log(response)
       // Visually alert user lawn has been saved
+    },
+
+    saveNewLawn() {
+      let response = util.saveNewLawn(this.newLawn)
+      console.log(response)
     }
   }
 }
@@ -187,6 +199,8 @@ export default {
 #lawn-container {
   grid-area: main;
   min-width: 600px;
+  display: flex;
+  justify-content: center;
 }
 
 #lawn-data {

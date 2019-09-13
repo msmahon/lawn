@@ -123,7 +123,7 @@ module.exports = class Query {
 	}
 
 	getGrassTypes() {
-		let query = "SELECT name FROM grass_types;"
+		let query = "SELECT rowid, name FROM grass_types;"
 		return this.connection.prepare(query).all()
 	}
 
