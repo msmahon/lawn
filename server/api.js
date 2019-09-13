@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/lawn/:name', function (req, res, next) {
-  let data = db.getLawn(req.params.name);
+  let data = Lawn.getLawnData(req.params.name)
   res.send(data)
 })
 
@@ -36,13 +36,9 @@ router.post('/lawn/reset', function(req, res, next) {
 	res.send(result)
 })
 
-router.post('/lawn/add', function(req, res, next) {
-	res.send(JSON.stringify(req))
-})
-
 router.post('/lawn/save', function(req, res, next) {
-	// return db.saveLawn(req.body);
 	let lawn = new Lawn(req.body)
+	lawn.saveLawn()
 })
 
 router.get('/events/:name', function(req, res, next) {

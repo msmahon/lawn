@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     gridStyle() {
-      if (this.data.tiles !== null) {
+      if (this.data.tiles && this.data.columns) {
         let rows = this.data.tiles.length / this.data.columns
         return {
           display: 'grid',

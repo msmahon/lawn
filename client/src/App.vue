@@ -33,16 +33,27 @@
         </div>
       </div>
 
-      <div v-if="noLawns" id="addLawnMenu" class="menu bgcolor-grey-100">
+      <div v-if="noLawns" id="add-lawn-menu" class="menu bgcolor-grey-100">
         <h2>Create a new Lawn</h2>
         <div>
-          <input type="text" name="name" id="lawnName">
-          <input type="range" name="width" id="lawnWidth">
-          <input type="range" name="height" id="lawnHeight">
-          <input type="text" name="zip" id="lawnZip">
-          <select name="grassType" id="lawnGrassType">
-            <option v-for="(value, key) in grassTypes" :key="key" />
+          <input id="lawn-name" type="text" name="name" placeholder="My Lawn"><br>
+          <input id="lawn-width" type="range" name="width" min="4" max="12" v-model.number="lawnWidth"><br>
+          <input id="lawn-height" type="range" name="height" min="4" max="8" v-model.number="lawnHeight"><br>
+          <input id="lawn-zip" type="text" name="zip" placeholder="ZIP"><br>
+          <select id="lawn-grass-type" name="grassType">
+            <option value="">-SELECT ONE-</option>
+            <option
+              v-for="(value, key) in grassTypes"
+              :key="key"
+              :value="value.name"
+              v-text="value.name"
+            />
           </select>
+          <div id="lawn-size-preview">
+            <div v-for="(value, key) in lawnWidth" :key="key">
+              <div v-for="(value, key) in lawnHeight" :key="key" class="lawn-cell"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -82,14 +93,14 @@ export default {
       conditionOptions: ['weeds', 'clover', 'ants'],
       healthOptions: ['good', 'fair', 'dead'],
       lawns: [],
-      selectedLawn: {
-        name: '',
-        tiles: null,
-        columns: null
-      },
+      selectedLawn: {},
       grassData: {},
+      events: [],
       grassTypes: [],
-      noLawns: true
+      noLawns: true,
+
+      lawnWidth: 4,
+      lawnHeight: 4
     }
   },
   computed: {
@@ -105,12 +116,14 @@ export default {
       ]
     }
   },
+
   created() {
     EventBus.$on('attributeUpdate', (payload) => {
       this.selections.current = payload[0]
       this.selections[payload[0]] = payload[1]
     })
   },
+
   async mounted() {
     this.lawns = await util.getLawns()
     if (this.lawns.length > 0) {
@@ -121,19 +134,22 @@ export default {
 
     this.grassTypes = await util.getGrassTypes()
   },
+
   methods: {
     async lawnSelected() {
-      let results = await util.fetchLawnData(this.selectedLawn.name)
-      results = results.data
-      if (results) {
-        this.selectedLawn.tiles = JSON.parse(results.lawns.data)
-        this.selectedLawn.columns = results.lawns.columns
-        this.grassData = results.grass_types
+      let lawnData = await util.getLawnData(this.selectedLawn.name)
+      if (lawnData) {
+        lawnData = lawnData.data
+        this.selectedLawn = lawnData.lawns
+        this.grassData = lawnData.grass_types
+        this.events = lawnData.events
       }
     },
+
     resetDatabase() {
       util.resetDatabase()
     },
+
     async saveChanges() {
       let response = await util.saveLawn(this.selectedLawn)
       console.log(response)
@@ -181,8 +197,20 @@ export default {
   grid-area: event-list;
 }
 
-#addLawnMenu {
+#add-lawn-menu {
   min-width: 600px;
+}
+
+#lawn-size-preview {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.lawn-cell {
+  width: 25px;
+  height: 25px;
+  border: 1px dotted hsl(0,0%,50%);
 }
 
 .menu {

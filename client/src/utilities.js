@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default {
-    fetchLawnData(lawnName) {
+    getLawnData(lawnName) {
         return axios.get(`/api/lawn/${lawnName}`)
     },
     resetDatabase() {
