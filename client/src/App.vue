@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <div id="container">
-      <div id="tile-modifiers" class="menu bgcolor-grey-100">
-        <div class="menu-title color-grey-700">Tile Modifiers</div>
+      <div id="tile-modifiers" class="menu">
+        <div class="menu-title">Tile Modifiers</div>
 
-        <div class="option-set-title color-grey-700">Conditions</div>
+        <div class="option-set-title">Conditions</div>
         <Radio :options="conditionOptions" :current-selection="selections.current" attribute="condition" />
 
-        <div class="option-set-title color-grey-800">Health</div>
+        <div class="option-set-title">Health</div>
         <Radio :options="healthOptions" :current-selection="selections.current" attribute="health" />
       </div>
 
-      <div v-if="!noLawns" class="menu bgcolor-grey-100">
+      <div v-if="!noLawns" class="menu">
         <div id="lawn-container">
           <Lawn
             :selections="selections"
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div v-if="noLawns" id="add-lawn-menu" class="menu bgcolor-grey-100">
+      <div v-if="noLawns" id="add-lawn-menu" class="menu">
         <h2>Create a new Lawn</h2>
         <div>
           <input id="lawn-name" v-model="newLawn.name" type="text" name="name" placeholder="My Lawn"><br>
@@ -60,8 +60,8 @@
         <div class="button" @click="saveNewLawn">Save</div>
       </div>
 
-      <div id="lawn-data" class="menu bgcolor-grey-100">
-        <div class="menu-title color-grey-700">Lawn Data</div>
+      <div id="lawn-data" class="menu">
+        <div class="menu-title">Lawn Data</div>
         <div class="option-set">
           <div class="option option-title"><span colspan="2" v-text="grassData.name" /></div>
           <div v-for="(value, key) in sortedGrassData" :key="key" class="option">
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <EventList class="menu bgcolor-grey-100" :lawn="selectedLawn.name" />
+      <EventList class="menu" :lawn="selectedLawn.name" />
     </div>
   </div>
 </template>
@@ -224,7 +224,7 @@ export default {
 .lawn-cell {
   width: 25px;
   height: 25px;
-  border: 1px dotted hsl(0,0%,50%);
+  border: 1px dotted var(--color-grey-200);
 }
 
 .menu {
@@ -234,26 +234,29 @@ export default {
   border-radius: 10px;
   box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
   height: auto;
+  background-color: var(--color-grey-100);
 }
 
 .menu-title {
   /* font-size: 1.75em; */
   font-weight: bold;
   text-transform: uppercase;
-  border-bottom: 1px solid hsl(150, 8%, 70%);
+  border-bottom: 1px solid var(--color-grey-300);
   margin: 0 -20px;
   padding-bottom: 20px;
   letter-spacing: 2px;
+  color: var(--color-grey-700);
 }
 
 .option-set-title {
   margin: 20px 0 5px;
+  color: var(--color-grey-800);
 }
 
 .option-set {
   background-color: rgb(255,255,255);
   border-radius: 10px;
-  border: 1px solid hsl(150,8%, 80%);
+  border: 1px solid var(--color-grey-200);
   width: 100%;
   margin: 10px 0 10px 0;
 }
@@ -263,7 +266,7 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: 8px;
-  border-bottom: 1px solid hsl(150, 8%, 80%);
+  border-bottom: 1px solid var(--color-grey-200);
   width: auto;
 }
 

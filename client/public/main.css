@@ -1,7 +1,38 @@
+/* Common Properties */
+:root {
+	/* Primary Shades */
+	--color-primary-100: hsl(150, 90%, 85%);
+	--color-primary-200: hsl(150, 80%, 78%);
+	--color-primary-300: hsl(150, 70%, 70%);
+	--color-primary-400: hsl(150, 60%, 60%);
+	--color-primary-500: hsl(150, 50%, 50%);
+	--color-primary-600: hsl(150, 60%, 40%);
+	--color-primary-700: hsl(150, 70%, 30%);
+	--color-primary-800: hsl(150, 80%, 25%);
+	--color-primary-900: hsl(150, 90%, 18%);
 
+	/* Grey Shades */
+	--color-grey-100: hsl(150, 8%, 90%);
+	--color-grey-200: hsl(150, 8%, 80%);
+	--color-grey-300: hsl(150, 8%, 70%);
+	--color-grey-400: hsl(150, 8%, 60%);
+	--color-grey-500: hsl(150, 8%, 50%);
+	--color-grey-600: hsl(150, 8%, 40%);
+	--color-grey-700: hsl(150, 8%, 30%);
+	--color-grey-800: hsl(150, 8%, 20%);
+	--color-grey-900: hsl(150, 8%, 10%);
+
+	/* Accent Shades */
+	--color-accent-100: hsl(300, 85%, 85%);
+	--color-accent-300: hsl(300, 78%, 75%);
+	--color-accent-500: hsl(300, 70%, 60%);
+	--color-accent-700: hsl(300, 75%, 45%);
+	--color-accent-900: hsl(300, 85%, 30%);
+}
 
 body {
 	margin: 0;
+	background-color: var(--color-primary-500);
 }
 
 header {
@@ -10,13 +41,15 @@ header {
 	justify-content: center;
 	height: 75px;
 	text-align: center;
+	background-color: var(--color-primary-700);
 }
 
 h1 {
 	margin: 0;
 	font-family: 'Fugaz One';
 	font-size: 3em;
-	text-shadow: 1px 3px hsl(150, 90%, 20%); /* primary-900 */
+	color: var(--color-primary-100);
+	text-shadow: 1px 3px var(--color-primary-900);
 }
 
 .button {
@@ -30,68 +63,16 @@ h1 {
 	padding: 5px 10px;
 	border-radius: 6px;
 	font-weight: bold;
-	border: 1px solid hsl(150, 8%, 70%);
+	border: 1px solid var(--color-grey-300);
 	cursor: pointer;
 }
 
 .button:hover {
-	background-color: hsl(150, 8%, 70%);
+	background-color: var(--color-grey-300);
 }
 
 .button-primary {
-	color: hsl(150, 90%, 18%);
-	background-color: hsl(150, 80%, 78%);
-	border-color: hsl(150, 60%, 40%) ;
+	color: var(--color-primary-900);
+	background-color: var(--color-primary-200);
+	border-color: var(--color-primary-600);
 }
-
-.color-primary-100 { color: hsl(150, 90%, 85%) }
-.color-primary-200 { color: hsl(150, 80%, 78%) }
-.color-primary-300 { color: hsl(150, 70%, 70%) }
-.color-primary-400 { color: hsl(150, 60%, 60%) }
-.color-primary-500 { color: hsl(150, 50%, 50%) }
-.color-primary-600 { color: hsl(150, 60%, 40%) }
-.color-primary-700 { color: hsl(150, 70%, 30%) }
-.color-primary-800 { color: hsl(150, 80%, 25%) }
-.color-primary-900 { color: hsl(150, 90%, 18%) }
-
-.bgcolor-primary-100 { background-color: hsl(150, 90%, 85%) }
-.bgcolor-primary-200 { background-color: hsl(150, 80%, 78%) }
-.bgcolor-primary-300 { background-color: hsl(150, 70%, 70%) }
-.bgcolor-primary-400 { background-color: hsl(150, 60%, 60%) }
-.bgcolor-primary-500 { background-color: hsl(150, 50%, 50%) }
-.bgcolor-primary-600 { background-color: hsl(150, 60%, 40%) }
-.bgcolor-primary-700 { background-color: hsl(150, 70%, 30%) }
-.bgcolor-primary-800 { background-color: hsl(150, 80%, 25%) }
-.bgcolor-primary-900 { background-color: hsl(150, 90%, 18%) }
-
-.color-grey-100 { color: hsl(150, 8%, 90%) }
-.color-grey-200 { color: hsl(150, 8%, 80%) }
-.color-grey-300 { color: hsl(150, 8%, 70%) }
-.color-grey-400 { color: hsl(150, 8%, 60%) }
-.color-grey-500 { color: hsl(150, 8%, 50%) }
-.color-grey-600 { color: hsl(150, 8%, 40%) }
-.color-grey-700 { color: hsl(150, 8%, 30%) }
-.color-grey-800 { color: hsl(150, 8%, 20%) }
-.color-grey-900 { color: hsl(150, 8%, 10%) }
-
-.bgcolor-grey-100 { background-color: hsl(150, 8%, 90%) }
-.bgcolor-grey-200 { background-color: hsl(150, 8%, 80%) }
-.bgcolor-grey-300 { background-color: hsl(150, 8%, 70%) }
-.bgcolor-grey-400 { background-color: hsl(150, 8%, 60%) }
-.bgcolor-grey-500 { background-color: hsl(150, 8%, 50%) }
-.bgcolor-grey-600 { background-color: hsl(150, 8%, 40%) }
-.bgcolor-grey-700 { background-color: hsl(150, 8%, 30%) }
-.bgcolor-grey-800 { background-color: hsl(150, 8%, 20%) }
-.bgcolor-grey-900 { background-color: hsl(150, 8%, 10%) }
-
-.color-accent-100 { color: hsl(300, 85%, 85%) }
-.color-accent-300 { color: hsl(300, 78%, 75%) }
-.color-accent-500 { color: hsl(300, 70%, 60%) }
-.color-accent-700 { color: hsl(300, 75%, 45%) }
-.color-accent-900 { color: hsl(300, 85%, 30%) }
-
-.bgcolor-accent-100 { background-color: hsl(300, 85%, 85%) }
-.bgcolor-accent-300 { background-color: hsl(300, 78%, 75%) }
-.bgcolor-accent-500 { background-color: hsl(300, 70%, 60%) }
-.bgcolor-accent-700 { background-color: hsl(300, 75%, 45%) }
-.bgcolor-accent-900 { background-color: hsl(300, 85%, 30%) }
