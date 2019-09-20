@@ -57,24 +57,24 @@ export default {
 .tile {
   width: 64px;
   height: 64px;
-  border: 1px solid hsl(150, 63%, 22%);
+  border: 1px solid var(--color-primary-700);
   cursor: pointer;
 }
 
 .tile:hover {
-  border: 1px solid hsl(150, 80%, 78%);
+  border: 1px dotted var(--color-primary-300);
 }
 
 .health-good {
-  background-color: hsl(150, 56%, 30%);
+  background-color: var(--color-primary-800);
 }
 
 .health-fair {
-  background-color: hsl(150, 38%, 53%);
+  background-color: var(--color-primary-500);
 }
 
 .health-dead {
-  background-color: hsl(82, 37%, 72%);
+  background-color: var(--color-secondary-400);
 }
 
 .condition {

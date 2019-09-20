@@ -224,39 +224,41 @@ export default {
 .lawn-cell {
   width: 25px;
   height: 25px;
-  border: 1px dotted var(--color-grey-200);
+  border: 1px dotted var(--color-secondary-200);
 }
 
 .menu {
   min-width: 200px;
   padding: 20px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3);
   height: auto;
-  background-color: var(--color-grey-100);
+  background-color: var(--color-secondary-100);
 }
 
 .menu-title {
   /* font-size: 1.75em; */
   font-weight: bold;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--color-grey-300);
+  border-bottom: 1px solid var(--color-secondary-300);
   margin: 0 -20px;
   padding-bottom: 20px;
   letter-spacing: 2px;
-  color: var(--color-grey-700);
+  color: var(--color-secondary-700);
 }
 
 .option-set-title {
   margin: 20px 0 5px;
-  color: var(--color-grey-800);
+  color: var(--color-secondary-800);
+  font-weight: bold;
+  text-align: left
 }
 
 .option-set {
   background-color: rgb(255,255,255);
   border-radius: 10px;
-  border: 1px solid var(--color-grey-200);
+  border: 1px solid var(--color-secondary-200);
   width: 100%;
   margin: 10px 0 10px 0;
 }
@@ -266,7 +268,7 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: 8px;
-  border-bottom: 1px solid var(--color-grey-200);
+  border-bottom: 1px solid var(--color-secondary-200);
   width: auto;
 }
 
