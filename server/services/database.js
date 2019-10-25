@@ -1,9 +1,32 @@
 const Database = require('better-sqlite3')
 const Seeder = require('./seeder')
+const Knex = require('knex')
+
+// ({
+// 	client: 'sqlite3',
+// 	connection: {
+// 		filename: '../lawn.db'
+// 	}
+// })
+
+// knex.raw("SELECT 1").then(
+// 	(result) => console.log(result)
+// );
 
 module.exports = class Query {
 	constructor(database = 'lawn.db') {
 		this.connection = Database(database, {verbose: console.log})
+
+		this.knex = new Knex({
+			client: 'sqlite3',
+			connection: {
+				filename: '../lawn.db'
+			}
+		})
+
+		this.knex.raw("SELECT 1").then(
+			(result) => console.log(result)
+		);
 	}
 
 	randomLawnConfiguration() {
