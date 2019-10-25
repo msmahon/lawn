@@ -115,7 +115,6 @@ export default {
     sortedGrassData() {
       return [
         { "name": "Color", "content": this.grassData.color },
-        { "name": "Season", "content": this.grassData.season },
         { "name": "Blade", "content": this.grassData.blade },
         { "name": "Growth", "content": this.grassData.growth },
         { "name": "Season", "content": this.grassData.season },
